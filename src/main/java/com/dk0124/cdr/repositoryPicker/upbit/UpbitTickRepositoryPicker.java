@@ -6,7 +6,7 @@ import com.dk0124.cdr.repository.upbit.upbitTickRepository.*;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
-import org.springframework.stereotype.Service;
+
 
 @RequiredArgsConstructor
 @Component
@@ -85,8 +85,8 @@ public class UpbitTickRepositoryPicker {
             case KRW_XRP:
                 return upbitTickKrwXrpRepository;
             default:
-                log.error("UpbitRespositoryPicker.getRepositoryFromCode , when code :  {}", code);
-                throw new IllegalStateException("UpbitRespositoryPicker.getRepositoryFromCode , when code :  {}"+ code);
+                log.error("UpbitTickRespositoryPicker.getRepositoryFromCode , when code :  {}", code);
+                throw new IllegalStateException("UpbitTickRespositoryPicker.getRepositoryFromCode , when code :  {}"+ code);
         }
     }
 

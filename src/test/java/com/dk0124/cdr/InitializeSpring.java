@@ -1,5 +1,6 @@
 package com.dk0124.cdr;
 
+import org.modelmapper.ModelMapper;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.domain.EntityScan;
@@ -16,5 +17,10 @@ import org.springframework.test.context.TestPropertySource;
 public class InitializeSpring {
     public static void main(String[] args) {
         SpringApplication.run(InitializeSpring.class, args);
+    }
+
+    @Bean
+    public ModelMapper modelMapper() {
+        return new ModelMapper();
     }
 }

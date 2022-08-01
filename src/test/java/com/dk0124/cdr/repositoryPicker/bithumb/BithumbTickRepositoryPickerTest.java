@@ -1,14 +1,13 @@
-package com.dk0124.cdr.repositoryPicker.upbit;
+package com.dk0124.cdr.repositoryPicker.bithumb;
 
 import com.dk0124.cdr.constants.coinCode.UpbitCoinCode.UpbitCoinCode;
+import com.dk0124.cdr.constants.coinCode.bithumbCoinCode.BithumbCoinCode;
+import com.dk0124.cdr.entity.bithumb.tick.BithumbTick;
+import com.dk0124.cdr.entity.bithumb.tick.BithumbTickFactory;
 import com.dk0124.cdr.entity.upbit.candle.UpbitCandle;
 import com.dk0124.cdr.entity.upbit.candle.UpbitCandleFactory;
-import com.dk0124.cdr.entity.upbit.tick.UpbitTick;
-import com.dk0124.cdr.entity.upbit.tick.UpbitTickFactory;
+import com.dk0124.cdr.repository.bithumb.bithumbTickRepository.BithumbTickCommonJpaInterface;
 import com.dk0124.cdr.repository.upbit.upbitCandleRepository.UpbitCandleCommonJpaInterface;
-import com.dk0124.cdr.repository.upbit.upbitTickRepository.UpbitTickKrwAdaRepository;
-import com.dk0124.cdr.repository.upbit.upbitTickRepository.UpbitTickRepository;
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -23,51 +22,50 @@ import org.testcontainers.containers.PostgreSQLContainer;
 import org.testcontainers.junit.jupiter.Container;
 import org.testcontainers.junit.jupiter.Testcontainers;
 
-
 import java.util.Arrays;
 import java.util.stream.Stream;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.*;
+
 
 
 @ExtendWith(SpringExtension.class)
 @ActiveProfiles("test")
 @SpringBootTest
 @Testcontainers
-class UpbitCandleRepositoryPickerTest {
+class BithumbTickRepositoryPickerTest {
+
     @Container
     static PostgreSQLContainer container = new PostgreSQLContainer().withDatabaseName("studyTest");
 
     @Autowired
-    UpbitCandleRepositoryPicker upbitTickRepositoryPicker;
+    BithumbTickRepositoryPicker bithumbTickRepositoryPicker;
 
     @Test
-    void empty(){ assertNotNull(upbitTickRepositoryPicker);}
-
+    void empty(){assertNotNull(bithumbTickRepositoryPicker);}
 
     @ParameterizedTest()
-    @DisplayName("UpbitCandleRepositoryPicker.getRepositoryFromCode(UpbitCoinCode code) 테스트")
+    @DisplayName("BithumbTickRepositoryPicker.getRepositoryFromCode(UpbitCoinCode code) 테스트")
     @MethodSource("get_each_typed_upbit_candles")
-    void getRepositoryFromCode(UpbitCandle c){
-        UpbitCandleCommonJpaInterface repository = upbitTickRepositoryPicker.getRepositoryFromCode(UpbitCoinCode.fromString(c.getMarket()));
-        UpbitCandle saved = repository.save(c);
+    void getRepositoryFromCode(BithumbTick t){
+       BithumbTickCommonJpaInterface repository = bithumbTickRepositoryPicker.getRepositoryFromCode(BithumbCoinCode.fromString(t.getCode()));
+        BithumbTick saved = repository.save(t);
         assertNotNull(saved);
-        assertEquals(c.getClass(),saved.getClass());
+        assertEquals(t.getClass(),saved.getClass());
     }
 
 
     static Stream<Arguments> get_each_typed_upbit_candles() {
-        UpbitCoinCode[] codes = UpbitCoinCode.values();
-        UpbitCandle[] candles = new UpbitCandle[codes.length];
-        for(int i =0 ; i< candles.length ; i++){
-            UpbitCandle c = UpbitCandle.builder()
-                    .market(codes[i].toString())
+        BithumbCoinCode[] codes = BithumbCoinCode.values();
+        BithumbTick[] ticks = new BithumbTick[codes.length];
+        for(int i =0 ; i< ticks.length ; i++){
+            BithumbTick c = BithumbTick.builder()
+                    .code(codes[i].toString())
                     .timestamp(Long.valueOf(i))
                     .build();
-            candles[i] = UpbitCandleFactory.of(c);
+            ticks[i] = BithumbTickFactory.of(c);
         }
-        return Arrays.stream(candles).map(c->Arguments.of(c));
+        return Arrays.stream(ticks).map(t->Arguments.of(t));
     }
 
 }
