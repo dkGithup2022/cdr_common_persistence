@@ -22,7 +22,6 @@ import java.util.Date;
 public class UpbitTick {
 
     @Id
-    @GeneratedValue(strategy =GenerationType.AUTO)
     @NotNull
     @JsonProperty("sid")
     @JsonAlias("sequential_id")

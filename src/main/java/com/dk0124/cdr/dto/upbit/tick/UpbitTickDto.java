@@ -5,8 +5,10 @@ import com.dk0124.cdr.entity.upbit.CallType;
 import com.fasterxml.jackson.annotation.JsonAlias;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.sun.istack.NotNull;
 import lombok.*;
 
+import javax.persistence.Id;
 import java.util.Date;
 
 @AllArgsConstructor
@@ -16,6 +18,12 @@ import java.util.Date;
 @Setter
 @ToString
 public class UpbitTickDto {
+
+    @NotNull
+    @JsonProperty("sid")
+    @JsonAlias("sequential_id")
+    private Long sequentialId;
+
     @JsonProperty("cd")
     @JsonAlias({"code","market"})
     private String code;
