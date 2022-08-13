@@ -1,6 +1,7 @@
 package com.dk0124.cdr.entity.upbit.orderbook;
 
 import com.dk0124.cdr.constants.coinCode.UpbitCoinCode.UpbitCoinCode;
+import com.dk0124.cdr.entity.upbit.orderbook.UpbitOrderbook;
 import com.dk0124.cdr.entity.upbit.orderbook.coins.*;
 import lombok.extern.slf4j.Slf4j;
 import org.modelmapper.ModelMapper;

@@ -3,23 +3,17 @@ package com.dk0124.cdr.repositoryPicker.upbit;
 import com.dk0124.cdr.constants.coinCode.UpbitCoinCode.UpbitCoinCode;
 import com.dk0124.cdr.entity.upbit.orderbook.UpbitOrderBookFactory;
 import com.dk0124.cdr.entity.upbit.orderbook.UpbitOrderbook;
-import com.dk0124.cdr.entity.upbit.tick.UpbitTick;
-import com.dk0124.cdr.entity.upbit.tick.UpbitTickFactory;
 import com.dk0124.cdr.repository.upbit.upbitOrderBookRepository.UpbitOrderbookCommonRepository;
 import com.dk0124.cdr.repository.upbit.upbitOrderBookRepository.UpbitOrderbookKrwAdaRepository;
+import com.dk0124.cdr.app.tags.IntegrationWithContainer;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.extension.ExtendWith;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.test.context.ActiveProfiles;
-import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.testcontainers.containers.PostgreSQLContainer;
 import org.testcontainers.junit.jupiter.Container;
-import org.testcontainers.junit.jupiter.Testcontainers;
 
 import java.util.Arrays;
 import java.util.stream.Stream;
@@ -27,10 +21,7 @@ import java.util.stream.Stream;
 import static org.junit.jupiter.api.Assertions.*;
 
 
-@ExtendWith(SpringExtension.class)
-@ActiveProfiles("test")
-@SpringBootTest
-@Testcontainers
+@IntegrationWithContainer
 class UpbitOrderbookRepositoryPickerTest {
     @Container
     static PostgreSQLContainer container = new PostgreSQLContainer().withDatabaseName("studyTest");

@@ -1,31 +1,22 @@
 package com.dk0124.cdr.repository.upbit;
 
-import com.dk0124.cdr.dto.bithumb.tick.BithumbTickDto;
 import com.dk0124.cdr.dto.upbit.tick.UpbitTickDto;
-import com.dk0124.cdr.entity.upbit.CallType;
 import com.dk0124.cdr.entity.upbit.tick.UpbitTick;
 import com.dk0124.cdr.entity.upbit.tick.UpbitTickFactory;
 import com.dk0124.cdr.entity.upbit.tick.coins.UpbitTickKrwDot;
 import com.dk0124.cdr.repository.upbit.upbitTickRepository.UpbitTickKrwDotRepository;
+import com.dk0124.cdr.app.tags.IntegrationWithContainer;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.extension.ExtendWith;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
-import org.springframework.test.context.ActiveProfiles;
-import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.testcontainers.containers.PostgreSQLContainer;
 import org.testcontainers.junit.jupiter.Container;
-import org.testcontainers.junit.jupiter.Testcontainers;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 
-@ExtendWith(SpringExtension.class)
-@DataJpaTest
-@ActiveProfiles("test")
-@Testcontainers
+@IntegrationWithContainer
 public class UpbitTickTest {
 
     @Container

@@ -1,0 +1,153 @@
+
+
+spring:
+  profile:
+    active: test
+  tast:
+    scheduling:
+      pool:
+        size: 2
+
+server:
+  port: 8082
+  tomcat:
+    threads:
+      max: 300
+
+
+logging:
+  file:
+    name: logs/log_v1_1.log
+
+---
+#test 환경
+spring:
+  config:
+    activate:
+      on-profile: test
+
+  datasource:
+    driver-class-name: org.postgresql.Driver
+    url: jdbc:postgresql://localhost:5432/testDB
+    username: postgres
+    password: postgres
+    hikari:
+      maximum-pool-size: 30
+      leakDetectionThreshold: 20000
+
+  h2:
+    console:
+      path: /h2-console
+      enabled: true
+
+  jpa:
+    show-sql: false
+    generate-ddl: true
+
+logging:
+  level:
+    org:
+      springframework:
+        cache: DEBUG
+
+    com:
+      zaxxer:
+        hikari:
+          HikariConfig: DEBUG
+
+
+
+---
+#dev 환경
+spring:
+  config:
+    activate:
+      on-profile: dev
+
+  datasource:
+    driver-class-name: org.postgresql.Driver
+    url: xx
+    username: postgres1
+    password: postgres1
+    hikari:
+      maximum-pool-size: 30
+      leakDetectionThreshold: 20000
+
+
+  jpa:
+    show-sql: false
+    generate-ddl: true
+    hibernate:
+      ddl-auto: create
+
+
+logging:
+  level:
+    org:
+      springframework:
+        cache: TRACE
+
+    com.zaxxer.hikari.HikariConfig: DEBUG
+    com.zaxxer.hikari: TRACE
+
+---
+#prod 환경
+spring:
+  config:
+    activate:
+      on-profile: prod
+
+  datasource:
+    driver-class-name: org.postgresql.Driver
+    url: xx
+    username: postgres
+    password: postgres1
+    hikari:
+      maximum-pool-size: 30
+      leakDetectionThreshold: 200000
+
+  jpa:
+    show-sql: false
+    generate-ddl: true
+    hibernate:
+      ddl-auto: validate
+logging:
+  level:
+    org:
+      springframework:
+        cache: TRACE
+
+    com.zaxxer.hikari.HikariConfig: DEBUG
+    com.zaxxer.hikari: TRACE
+
+---
+#prod2 환경
+spring:
+  config:
+    activate:
+      on-profile: prod2
+
+  datasource:
+    driver-class-name: org.postgresql.Driver
+    url: xx
+    #url: jdbc:postgresql://192.168.1.101:5432/v1
+    username: postgres1
+    password: postgres1
+    hikari:
+      maximum-pool-size: 30
+      leakDetectionThreshold: 200000
+
+  jpa:
+    show-sql: false
+    generate-ddl: true
+    hibernate:
+      ddl-auto: create
+
+logging:
+  level:
+    org:
+      springframework:
+        cache: TRACE
+
+    com.zaxxer.hikari.HikariConfig: DEBUG
+    com.zaxxer.hikari: TRACE
