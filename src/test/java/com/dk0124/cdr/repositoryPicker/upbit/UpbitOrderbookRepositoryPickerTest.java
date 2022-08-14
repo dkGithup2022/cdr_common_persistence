@@ -5,7 +5,7 @@ import com.dk0124.cdr.entity.upbit.orderbook.UpbitOrderBookFactory;
 import com.dk0124.cdr.entity.upbit.orderbook.UpbitOrderbook;
 import com.dk0124.cdr.repository.upbit.upbitOrderBookRepository.UpbitOrderbookCommonRepository;
 import com.dk0124.cdr.repository.upbit.upbitOrderBookRepository.UpbitOrderbookKrwAdaRepository;
-import com.dk0124.cdr.app.tags.IntegrationWithContainer;
+import com.dk0124.cdr.tags.IntegrationWithContainer;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;

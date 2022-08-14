@@ -5,7 +5,7 @@ import com.dk0124.cdr.entity.upbit.tick.UpbitTick;
 import com.dk0124.cdr.entity.upbit.tick.UpbitTickFactory;
 import com.dk0124.cdr.entity.upbit.tick.coins.UpbitTickKrwDot;
 import com.dk0124.cdr.repository.upbit.upbitTickRepository.UpbitTickKrwDotRepository;
-import com.dk0124.cdr.app.tags.IntegrationWithContainer;
+import com.dk0124.cdr.tags.IntegrationWithContainer;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.modelmapper.ModelMapper;
@@ -36,7 +36,7 @@ public class UpbitTickTest {
         //given
         UpbitTickDto dto = UpbitTickDto
                 .builder()
-                .code("KRW-BTC").timestamp(1L)
+                .code("KRW-BTC").timestamp(1L).sequentialId(10L)
                 .build();
 
         UpbitTick entity = mapper.map(dto,UpbitTick.class);
@@ -58,7 +58,7 @@ public class UpbitTickTest {
         //given
         UpbitTickDto dto = UpbitTickDto
                 .builder()
-                .code("KRW-DOT").timestamp(1L)
+                .code("KRW-DOT").timestamp(1L).sequentialId(10L)
                 .build();
 
         UpbitTick entity = mapper.map(dto,UpbitTick.class);
@@ -79,7 +79,7 @@ public class UpbitTickTest {
         //given
         UpbitTickDto dto = UpbitTickDto
                 .builder()
-                .code("KRW-DOT").timestamp(1L)
+                .code("KRW-DOT").timestamp(1L).sequentialId(10L)
                 .build();
 
         UpbitTick entity = mapper.map(dto,UpbitTick.class);

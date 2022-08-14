@@ -9,7 +9,7 @@ import org.springframework.context.annotation.Configuration;
 @Configuration
 public class ConfigureMapper {
     @Bean
-    @ConditionalOnMissingBean
+    @ConditionalOnMissingBean(ModelMapper.class)
     public ModelMapper modelMapper(){
         return new ModelMapper();
     }

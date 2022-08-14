@@ -15,7 +15,7 @@ import org.testcontainers.junit.jupiter.Testcontainers;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 @SpringBootApplication
-@EntityScan({"com.dk0124.cdr.entity.upbit","com.dk0124.cdr.entity.bithumb"})
+//@EntityScan({"com.dk0124.cdr.entity.upbit","com.dk0124.cdr.entity.bithumb"})
 @ActiveProfiles("docker")
 @TestPropertySource(locations="classpath:application.yml")
 public class InitializeSpring {

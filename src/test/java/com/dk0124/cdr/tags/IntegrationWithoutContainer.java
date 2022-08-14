@@ -1,4 +1,4 @@
-package com.dk0124.cdr.app.tags;
+package com.dk0124.cdr.tags;
 
 
 import org.junit.jupiter.api.extension.ExtendWith;

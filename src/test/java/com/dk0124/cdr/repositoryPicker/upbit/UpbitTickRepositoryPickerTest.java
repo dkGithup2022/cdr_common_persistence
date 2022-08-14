@@ -4,7 +4,7 @@ import com.dk0124.cdr.constants.coinCode.UpbitCoinCode.UpbitCoinCode;
 import com.dk0124.cdr.entity.upbit.tick.UpbitTick;
 import com.dk0124.cdr.entity.upbit.tick.UpbitTickFactory;
 import com.dk0124.cdr.repository.upbit.upbitTickRepository.UpbitTickRepository;
-import com.dk0124.cdr.app.tags.IntegrationWithContainer;
+import com.dk0124.cdr.tags.IntegrationWithContainer;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;

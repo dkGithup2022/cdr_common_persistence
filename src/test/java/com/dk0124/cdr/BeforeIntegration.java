@@ -1,19 +1,20 @@
 package com.dk0124.cdr;
 
 
-import com.dk0124.cdr.app.tags.IntegrationWithContainer;
-import com.dk0124.cdr.app.tags.IntegrationWithoutContainer;
+import com.dk0124.cdr.tags.IntegrationWithoutContainer;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.test.context.ActiveProfiles;
 
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 
 @IntegrationWithoutContainer
+@Disabled
 public class BeforeIntegration {
-
     @Autowired
     ModelMapper modelMapper;
 

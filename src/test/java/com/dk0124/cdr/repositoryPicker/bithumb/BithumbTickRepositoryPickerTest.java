@@ -4,7 +4,7 @@ import com.dk0124.cdr.constants.coinCode.bithumbCoinCode.BithumbCoinCode;
 import com.dk0124.cdr.entity.bithumb.tick.BithumbTick;
 import com.dk0124.cdr.entity.bithumb.tick.BithumbTickFactory;
 import com.dk0124.cdr.repository.bithumb.bithumbTickRepository.BithumbTickCommonJpaInterface;
-import com.dk0124.cdr.app.tags.IntegrationWithContainer;
+import com.dk0124.cdr.tags.IntegrationWithContainer;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;

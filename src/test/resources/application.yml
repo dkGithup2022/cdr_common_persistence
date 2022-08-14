@@ -1,12 +1,12 @@
 
-
 ---
 #docker 환경
 spring:
   config:
     activate:
       on-profile: docker
-
+  main:
+    allow-bean-definition-overriding: true
   datasource:
     driver-class-name: org.postgresql.Driver
     url: jdbc:postgresql://localhost:5432/testDB
@@ -18,12 +18,16 @@ spring:
       ddl-auto: create
     show-sql: true
 
+
 ---
 #컨테이너
 spring:
   config:
     activate:
       on-profile: container
+
+  main:
+    allow-bean-definition-overriding: true
 
   datasource:
     driver-class-name: org.testcontainers.jdbc.ContainerDatabaseDriver
