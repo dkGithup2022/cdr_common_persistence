@@ -1,5 +1,6 @@
 package com.dk0124.cdr.entity.bithumb.candle;
 
+import com.dk0124.cdr.entity.abstraction.Candle;
 import lombok.*;
 
 import javax.persistence.*;
@@ -8,7 +9,7 @@ import javax.persistence.*;
 @AllArgsConstructor @NoArgsConstructor
 @Builder @Getter @Setter
 @EqualsAndHashCode(of = "id")
-public class BithumbCandle {
+public class BithumbCandle  implements Candle {
 
     public BithumbCandle(String code, Long timestamp, Double openingPrice, Double closingPrice, Double highPrice, Double lowPrice, Double tradeAmount) {
         this.code = code;

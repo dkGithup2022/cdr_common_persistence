@@ -1,5 +1,6 @@
 package com.dk0124.cdr.entity.upbit.tick;
 
+import com.dk0124.cdr.entity.abstraction.Ticks;
 import com.fasterxml.jackson.annotation.JsonAlias;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -19,7 +20,7 @@ import java.util.Date;
 @Setter
 @ToString
 @EqualsAndHashCode(of = "id")
-public class UpbitTick {
+public class UpbitTick implements Ticks {
 
     @Id
     @NotNull

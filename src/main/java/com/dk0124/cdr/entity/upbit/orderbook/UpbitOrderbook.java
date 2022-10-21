@@ -1,6 +1,7 @@
 package com.dk0124.cdr.entity.upbit.orderbook;
 
 
+import com.dk0124.cdr.entity.abstraction.Orderbook;
 import com.fasterxml.jackson.annotation.JsonAlias;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.sun.istack.NotNull;
@@ -21,7 +22,7 @@ import java.util.List;
 @ToString
 @EqualsAndHashCode(of = "id")
 @TypeDef(name = "jsonb", typeClass = JsonBinaryType.class)
-public class UpbitOrderbook implements Serializable {
+public class UpbitOrderbook implements Serializable, Orderbook {
 
     public UpbitOrderbook(String code, Long timestamp, Double totalAskSize , Double totalBidSize, List<OrderBookUnit> orderBookUnits){
         this.code = code;

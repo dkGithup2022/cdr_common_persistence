@@ -1,5 +1,6 @@
 package com.dk0124.cdr.entity.upbit.candle;
 
+import com.dk0124.cdr.entity.abstraction.Candle;
 import com.fasterxml.jackson.annotation.JsonAlias;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.sun.istack.NotNull;
@@ -16,7 +17,7 @@ import java.util.Date;
 @Builder
 @Getter @Setter
 @EqualsAndHashCode(of = "id")
-public class UpbitCandle implements Serializable {
+public class UpbitCandle implements Serializable, Candle {
 
     public UpbitCandle(Long timestamp,
                        String market,

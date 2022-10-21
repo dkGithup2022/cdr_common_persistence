@@ -1,6 +1,7 @@
 package com.dk0124.cdr.entity.bithumb.orderbook;
 
 
+import com.dk0124.cdr.entity.abstraction.Orderbook;
 import com.fasterxml.jackson.annotation.JsonAlias;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.vladmihalcea.hibernate.type.json.JsonBinaryType;
@@ -19,7 +20,7 @@ import java.util.List;
 @ToString
 @EqualsAndHashCode(of = "id")
 @TypeDef(name = "jsonb", typeClass = JsonBinaryType.class)
-public class BithumbOrderbook {
+public class BithumbOrderbook  implements Orderbook {
 
     public BithumbOrderbook(Long datetime, String code,List<BithumbOrderbookUnit> orderbookUnits){
         this.datetime = datetime;
