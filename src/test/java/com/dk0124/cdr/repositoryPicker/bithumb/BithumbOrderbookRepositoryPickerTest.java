@@ -1,8 +1,15 @@
 package com.dk0124.cdr.repositoryPicker.bithumb;
 
 import com.dk0124.cdr.constants.coinCode.bithumbCoinCode.BithumbCoinCode;
+import com.dk0124.cdr.dto.bithumb.candle.BithumbCandleDto;
+import com.dk0124.cdr.dto.bithumb.orderbook.BithumbOrderbookDto;
+import com.dk0124.cdr.entity.bithumb.candle.BithumbCandle;
+import com.dk0124.cdr.entity.bithumb.candle.BithumbCandleFactory;
 import com.dk0124.cdr.entity.bithumb.orderbook.BithumbOrderbook;
 import com.dk0124.cdr.entity.bithumb.orderbook.BithumbOrderbookFactory;
+import com.dk0124.cdr.mapper.bithumb.BithumbCandleMapper;
+import com.dk0124.cdr.mapper.bithumb.BithumbOrderbookMapper;
+import com.dk0124.cdr.repository.bithumb.bithumbCandleRepository.BithumbCandleCommonJpaInterface;
 import com.dk0124.cdr.repository.bithumb.bithumbOrderbookRepository.BithumbOrderbookCommonJpaInterface;
 import com.dk0124.cdr.tags.IntegrationWithContainer;
 import org.junit.jupiter.api.DisplayName;
@@ -11,21 +18,29 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
+import org.springframework.transaction.annotation.Transactional;
 import org.testcontainers.containers.PostgreSQLContainer;
 import org.testcontainers.junit.jupiter.Container;
 
 import java.util.Arrays;
+import java.util.List;
 import java.util.stream.Stream;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 @IntegrationWithContainer
+@Transactional
 class BithumbOrderbookRepositoryPickerTest {
     @Container
     static PostgreSQLContainer container = new PostgreSQLContainer().withDatabaseName("studyTest");
 
     @Autowired
     BithumbOrderbookRepositoryPicker bithumbOrderbookRepositoryPicker;
+
+    @Autowired
+    BithumbOrderbookMapper bithumbOrderbookMapper;
 
     @Test
     void empty(){ assertNotNull(bithumbOrderbookRepositoryPicker);}
@@ -54,6 +69,79 @@ class BithumbOrderbookRepositoryPickerTest {
             candles[i] = BithumbOrderbookFactory.of(o);
         }
         return Arrays.stream(candles).map(o->Arguments.of(o));
+    }
+
+
+
+    @Test
+    @DisplayName("기능 테스트, timestamp 기준 creation query 테스트 / 200 개 요청 성공 ")
+    void functionCreationWithPagable() {
+        save1000Orderbooks();
+
+        BithumbOrderbookCommonJpaInterface repo
+                = bithumbOrderbookRepositoryPicker.getRepositoryFromCode(BithumbCoinCode.KRW_ADA);
+
+        PageRequest pageRequest = PageRequest.of(0, 200, Sort.by("datetime").descending());
+        List<BithumbOrderbook> list = repo.findByDatetimeLessThanEqual(500L, pageRequest);
+
+
+        System.out.println(list);
+        System.out.println(list.size());
+        System.out.println("first: " + list.get(0));
+        System.out.println("last: " + list.get(list.size() - 1));
+        assertEquals(200,list.size());
+    }
+
+    @Test
+    @DisplayName("기능 테스트, timestamp 기준 creation query 테스트 / 200 개 요청, 100 번째 순서에 ")
+    void functionCreationWithPagabl2() {
+        save1000Orderbooks();
+
+        BithumbOrderbookCommonJpaInterface repo
+                = bithumbOrderbookRepositoryPicker.getRepositoryFromCode(BithumbCoinCode.KRW_ADA);
+
+        PageRequest pageRequest = PageRequest.of(0, 200, Sort.by("datetime").descending());
+        List<BithumbOrderbook> list = repo.findByDatetimeLessThanEqual(100L, pageRequest);
+
+
+        System.out.println(list);
+        System.out.println(list.size());
+        System.out.println("first: " + list.get(0));
+        System.out.println("last: " + list.get(list.size() - 1));
+        assertEquals(101,list.size());
+
+    }
+
+
+    @Test
+    @DisplayName("기능 테스트, timestamp 기준 creation query 테스트 / 200 개 요청, -1 번째 순서에 ")
+    void functionCreationWithPagabl3() {
+        save1000Orderbooks();
+
+        BithumbOrderbookCommonJpaInterface repo
+                = bithumbOrderbookRepositoryPicker.getRepositoryFromCode(BithumbCoinCode.KRW_ADA);
+
+        PageRequest pageRequest = PageRequest.of(0, 200, Sort.by("datetime").descending());
+        List<BithumbOrderbook> list = repo.findByDatetimeLessThanEqual(-1L, pageRequest);
+
+        assertEquals(0,list.size());
+
+    }
+
+
+
+    private void save1000Orderbooks() {
+        for (int i = 0; i < 1000; i++) {
+            BithumbOrderbookDto dto = BithumbOrderbookDto
+                    .builder()
+                    .code(BithumbCoinCode.KRW_ADA.toString())
+                    .datetime(Long.valueOf(i))
+                    .build();
+
+            BithumbOrderbookCommonJpaInterface repo =
+                    bithumbOrderbookRepositoryPicker.getRepositoryFromCode(BithumbCoinCode.fromString(dto.getCode()));
+            repo.save(BithumbOrderbookFactory.of(bithumbOrderbookMapper.mapOrderbook(dto)));
+        }
     }
 
 

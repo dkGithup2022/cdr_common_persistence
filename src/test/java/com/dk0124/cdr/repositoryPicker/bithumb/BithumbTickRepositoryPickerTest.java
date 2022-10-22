@@ -1,8 +1,14 @@
 package com.dk0124.cdr.repositoryPicker.bithumb;
 
 import com.dk0124.cdr.constants.coinCode.bithumbCoinCode.BithumbCoinCode;
+import com.dk0124.cdr.dto.bithumb.orderbook.BithumbOrderbookDto;
+import com.dk0124.cdr.dto.bithumb.tick.BithumbTickDto;
+import com.dk0124.cdr.entity.bithumb.candle.BithumbCandle;
+import com.dk0124.cdr.entity.bithumb.orderbook.BithumbOrderbook;
+import com.dk0124.cdr.entity.bithumb.orderbook.BithumbOrderbookFactory;
 import com.dk0124.cdr.entity.bithumb.tick.BithumbTick;
 import com.dk0124.cdr.entity.bithumb.tick.BithumbTickFactory;
+import com.dk0124.cdr.repository.bithumb.bithumbOrderbookRepository.BithumbOrderbookCommonJpaInterface;
 import com.dk0124.cdr.repository.bithumb.bithumbTickRepository.BithumbTickCommonJpaInterface;
 import com.dk0124.cdr.tags.IntegrationWithContainer;
 import org.junit.jupiter.api.DisplayName;
@@ -11,16 +17,21 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
+import org.springframework.transaction.annotation.Transactional;
 import org.testcontainers.containers.PostgreSQLContainer;
 import org.testcontainers.junit.jupiter.Container;
 
 import java.util.Arrays;
+import java.util.List;
 import java.util.stream.Stream;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 
 @IntegrationWithContainer
+@Transactional
 class BithumbTickRepositoryPickerTest {
 
     @Container
@@ -28,6 +39,8 @@ class BithumbTickRepositoryPickerTest {
 
     @Autowired
     BithumbTickRepositoryPicker bithumbTickRepositoryPicker;
+
+
 
     @Test
     void empty(){assertNotNull(bithumbTickRepositoryPicker);}
@@ -55,5 +68,79 @@ class BithumbTickRepositoryPickerTest {
         }
         return Arrays.stream(ticks).map(t->Arguments.of(t));
     }
+
+    @Test
+    @DisplayName("기능 테스트, timestamp 기준 creation query 테스트 / 200 개 요청 성공 ")
+    void functionCreationWithPagable() {
+        save1000Ticks();
+
+        BithumbTickCommonJpaInterface repo =
+                bithumbTickRepositoryPicker.getRepositoryFromCode(BithumbCoinCode.KRW_ADA);
+
+        PageRequest pageRequest = PageRequest.of(0, 200, Sort.by("timestamp").descending());
+        List<BithumbTick> list = repo.findByTimestampLessThanEqual(500L, pageRequest);
+
+
+        System.out.println(list);
+        System.out.println(list.size());
+        System.out.println("first: " + list.get(0));
+        System.out.println("last: " + list.get(list.size() - 1));
+        assertEquals(200,list.size());
+    }
+
+    @Test
+    @DisplayName("기능 테스트, timestamp 기준 creation query 테스트 / 100 개 요청 성공 ")
+    void functionCreationWithPagable2() {
+        save1000Ticks();
+
+        BithumbTickCommonJpaInterface repo =
+                bithumbTickRepositoryPicker.getRepositoryFromCode(BithumbCoinCode.KRW_ADA);
+
+        PageRequest pageRequest = PageRequest.of(0, 200, Sort.by("timestamp").descending());
+        List<BithumbTick> list = repo.findByTimestampLessThanEqual(100L, pageRequest);
+
+
+        System.out.println(list);
+        System.out.println(list.size());
+        System.out.println("first: " + list.get(0));
+        System.out.println("last: " + list.get(list.size() - 1));
+        assertEquals(101,list.size());
+    }
+
+    @Test
+    @DisplayName("기능 테스트, timestamp 기준 creation query 테스트 / -1 개 요청 성공 ")
+    void functionCreationWithPagable3() {
+        save1000Ticks();
+
+        BithumbTickCommonJpaInterface repo =
+                bithumbTickRepositoryPicker.getRepositoryFromCode(BithumbCoinCode.KRW_ADA);
+
+        PageRequest pageRequest = PageRequest.of(0, 200, Sort.by("timestamp").descending());
+        List<BithumbTick> list = repo.findByTimestampLessThanEqual(-1L, pageRequest);
+
+
+        System.out.println(list);
+        System.out.println(list.size());
+        assertEquals(0,list.size());
+    }
+
+
+
+    private void save1000Ticks() {
+        for (int i = 0; i < 1000; i++) {
+
+            BithumbTick bithumbTick = BithumbTick.builder()
+                    .code(BithumbCoinCode.KRW_ADA.toString())
+                    .timestamp(Long.valueOf(i))
+                    .build();
+
+
+            BithumbTickCommonJpaInterface repo =
+                    bithumbTickRepositoryPicker.getRepositoryFromCode(BithumbCoinCode.KRW_ADA);
+
+            repo.save(BithumbTickFactory.of(bithumbTick));
+        }
+    }
+
 
 }

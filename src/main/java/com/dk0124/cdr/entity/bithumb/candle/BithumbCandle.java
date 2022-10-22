@@ -45,4 +45,18 @@ public class BithumbCandle  implements Candle {
 
     @Column(name = "trade_amount")
     private Double tradeAmount;
+
+    @Override
+    public String toString() {
+        return "BithumbCandle{" +
+                "id=" + id +
+                ", code='" + code + '\'' +
+                ", timestamp=" + timestamp +
+                ", openingPrice=" + openingPrice +
+                ", closingPrice=" + closingPrice +
+                ", highPrice=" + highPrice +
+                ", lowPrice=" + lowPrice +
+                ", tradeAmount=" + tradeAmount +
+                '}';
+    }
 }
