@@ -1,7 +1,8 @@
 package com.dk0124.cdr.mapper.upbit;
 
-import com.dk0124.cdr.dto.upbit.candle.UpbitCandleDto;
-import com.dk0124.cdr.entity.upbit.candle.UpbitCandle;
+import com.dk0124.cdr.persistence.dto.upbit.candle.UpbitCandleDto;
+import com.dk0124.cdr.persistence.entity.upbit.candle.UpbitCandle;
+import com.dk0124.cdr.persistence.mapper.upbit.UpbitCandleMapper;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;

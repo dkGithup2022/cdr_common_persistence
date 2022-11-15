@@ -1,23 +1,17 @@
 package com.dk0124.cdr.repository.bithumb;
 
 import com.dk0124.cdr.constants.coinCode.bithumbCoinCode.BithumbCoinCode;
-import com.dk0124.cdr.dto.bithumb.candle.BithumbCandleDto;
-import com.dk0124.cdr.entity.bithumb.candle.BithumbCandle;
-import com.dk0124.cdr.entity.bithumb.candle.BithumbCandleFactory;
-import com.dk0124.cdr.entity.bithumb.candle.coins.BithumbCandleKrwAda;
-import com.dk0124.cdr.mapper.bithumb.BithumbCandleMapper;
-import com.dk0124.cdr.repository.bithumb.bithumbCandleRepository.BithumbCandleCommonJpaInterface;
-import com.dk0124.cdr.repositoryPicker.bithumb.BithumbCandleRepositoryPicker;
+import com.dk0124.cdr.persistence.dto.bithumb.candle.BithumbCandleDto;
+import com.dk0124.cdr.persistence.entity.bithumb.candle.BithumbCandleFactory;
+import com.dk0124.cdr.persistence.mapper.bithumb.BithumbCandleMapper;
+import com.dk0124.cdr.persistence.repository.bithumb.bithumbCandleRepository.BithumbCandleCommonJpaInterface;
+import com.dk0124.cdr.persistence.repositoryPicker.bithumb.BithumbCandleRepositoryPicker;
 import com.dk0124.cdr.tags.IntegrationWithContainer;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Sort;
 import org.testcontainers.containers.PostgreSQLContainer;
 import org.testcontainers.junit.jupiter.Container;
-
-import java.awt.print.Pageable;
 
 @IntegrationWithContainer
 public class BithumbCandleTest {

@@ -1,6 +1,7 @@
 package com.dk0124.cdr.dto.bithumb.candle;
 
-import com.dk0124.cdr.entity.bithumb.candle.BithumbCandle;
+import com.dk0124.cdr.persistence.entity.bithumb.candle.BithumbCandle;
+import com.dk0124.cdr.persistence.dto.bithumb.candle.BithumbCandleDto;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;

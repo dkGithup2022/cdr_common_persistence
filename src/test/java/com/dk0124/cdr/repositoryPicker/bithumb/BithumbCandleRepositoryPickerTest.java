@@ -1,14 +1,13 @@
 package com.dk0124.cdr.repositoryPicker.bithumb;
 
 import com.dk0124.cdr.constants.coinCode.bithumbCoinCode.BithumbCoinCode;
-import com.dk0124.cdr.dto.bithumb.candle.BithumbCandleDto;
-import com.dk0124.cdr.entity.abstraction.Candle;
-import com.dk0124.cdr.entity.bithumb.candle.BithumbCandle;
-import com.dk0124.cdr.entity.bithumb.candle.BithumbCandleFactory;
-import com.dk0124.cdr.mapper.bithumb.BithumbCandleMapper;
-import com.dk0124.cdr.repository.bithumb.bithumbCandleRepository.BithumbCandleCommonJpaInterface;
+import com.dk0124.cdr.persistence.dto.bithumb.candle.BithumbCandleDto;
+import com.dk0124.cdr.persistence.entity.bithumb.candle.BithumbCandle;
+import com.dk0124.cdr.persistence.entity.bithumb.candle.BithumbCandleFactory;
+import com.dk0124.cdr.persistence.mapper.bithumb.BithumbCandleMapper;
+import com.dk0124.cdr.persistence.repository.bithumb.bithumbCandleRepository.BithumbCandleCommonJpaInterface;
+import com.dk0124.cdr.persistence.repositoryPicker.bithumb.BithumbCandleRepositoryPicker;
 import com.dk0124.cdr.tags.IntegrationWithContainer;
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;

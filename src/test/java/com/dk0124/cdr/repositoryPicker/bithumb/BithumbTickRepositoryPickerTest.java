@@ -1,15 +1,10 @@
 package com.dk0124.cdr.repositoryPicker.bithumb;
 
 import com.dk0124.cdr.constants.coinCode.bithumbCoinCode.BithumbCoinCode;
-import com.dk0124.cdr.dto.bithumb.orderbook.BithumbOrderbookDto;
-import com.dk0124.cdr.dto.bithumb.tick.BithumbTickDto;
-import com.dk0124.cdr.entity.bithumb.candle.BithumbCandle;
-import com.dk0124.cdr.entity.bithumb.orderbook.BithumbOrderbook;
-import com.dk0124.cdr.entity.bithumb.orderbook.BithumbOrderbookFactory;
-import com.dk0124.cdr.entity.bithumb.tick.BithumbTick;
-import com.dk0124.cdr.entity.bithumb.tick.BithumbTickFactory;
-import com.dk0124.cdr.repository.bithumb.bithumbOrderbookRepository.BithumbOrderbookCommonJpaInterface;
-import com.dk0124.cdr.repository.bithumb.bithumbTickRepository.BithumbTickCommonJpaInterface;
+import com.dk0124.cdr.persistence.entity.bithumb.tick.BithumbTick;
+import com.dk0124.cdr.persistence.entity.bithumb.tick.BithumbTickFactory;
+import com.dk0124.cdr.persistence.repository.bithumb.bithumbTickRepository.BithumbTickCommonJpaInterface;
+import com.dk0124.cdr.persistence.repositoryPicker.bithumb.BithumbTickRepositoryPicker;
 import com.dk0124.cdr.tags.IntegrationWithContainer;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;

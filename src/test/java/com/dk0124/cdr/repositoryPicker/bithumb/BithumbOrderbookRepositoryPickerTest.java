@@ -1,16 +1,12 @@
 package com.dk0124.cdr.repositoryPicker.bithumb;
 
 import com.dk0124.cdr.constants.coinCode.bithumbCoinCode.BithumbCoinCode;
-import com.dk0124.cdr.dto.bithumb.candle.BithumbCandleDto;
-import com.dk0124.cdr.dto.bithumb.orderbook.BithumbOrderbookDto;
-import com.dk0124.cdr.entity.bithumb.candle.BithumbCandle;
-import com.dk0124.cdr.entity.bithumb.candle.BithumbCandleFactory;
-import com.dk0124.cdr.entity.bithumb.orderbook.BithumbOrderbook;
-import com.dk0124.cdr.entity.bithumb.orderbook.BithumbOrderbookFactory;
-import com.dk0124.cdr.mapper.bithumb.BithumbCandleMapper;
-import com.dk0124.cdr.mapper.bithumb.BithumbOrderbookMapper;
-import com.dk0124.cdr.repository.bithumb.bithumbCandleRepository.BithumbCandleCommonJpaInterface;
-import com.dk0124.cdr.repository.bithumb.bithumbOrderbookRepository.BithumbOrderbookCommonJpaInterface;
+import com.dk0124.cdr.persistence.dto.bithumb.orderbook.BithumbOrderbookDto;
+import com.dk0124.cdr.persistence.entity.bithumb.orderbook.BithumbOrderbook;
+import com.dk0124.cdr.persistence.entity.bithumb.orderbook.BithumbOrderbookFactory;
+import com.dk0124.cdr.persistence.mapper.bithumb.BithumbOrderbookMapper;
+import com.dk0124.cdr.persistence.repository.bithumb.bithumbOrderbookRepository.BithumbOrderbookCommonJpaInterface;
+import com.dk0124.cdr.persistence.repositoryPicker.bithumb.BithumbOrderbookRepositoryPicker;
 import com.dk0124.cdr.tags.IntegrationWithContainer;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;

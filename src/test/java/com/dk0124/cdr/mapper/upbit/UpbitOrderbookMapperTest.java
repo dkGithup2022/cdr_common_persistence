@@ -1,7 +1,8 @@
 package com.dk0124.cdr.mapper.upbit;
 
-import com.dk0124.cdr.dto.upbit.orderbook.UpbitOrderbookDto;
-import com.dk0124.cdr.entity.upbit.orderbook.UpbitOrderbook;
+import com.dk0124.cdr.persistence.dto.upbit.orderbook.UpbitOrderbookDto;
+import com.dk0124.cdr.persistence.entity.upbit.orderbook.UpbitOrderbook;
+import com.dk0124.cdr.persistence.mapper.upbit.UpbitOrderbookMapper;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;

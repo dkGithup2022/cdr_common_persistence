@@ -1,15 +1,10 @@
 package com.dk0124.cdr.repositoryPicker.upbit;
 
 import com.dk0124.cdr.constants.coinCode.UpbitCoinCode.UpbitCoinCode;
-import com.dk0124.cdr.constants.coinCode.bithumbCoinCode.BithumbCoinCode;
-import com.dk0124.cdr.entity.bithumb.tick.BithumbTick;
-import com.dk0124.cdr.entity.bithumb.tick.BithumbTickFactory;
-import com.dk0124.cdr.entity.upbit.orderbook.UpbitOrderbook;
-import com.dk0124.cdr.entity.upbit.tick.UpbitTick;
-import com.dk0124.cdr.entity.upbit.tick.UpbitTickFactory;
-import com.dk0124.cdr.repository.bithumb.bithumbTickRepository.BithumbTickCommonJpaInterface;
-import com.dk0124.cdr.repository.upbit.upbitOrderBookRepository.UpbitOrderbookCommonRepository;
-import com.dk0124.cdr.repository.upbit.upbitTickRepository.UpbitTickRepository;
+import com.dk0124.cdr.persistence.entity.upbit.tick.UpbitTick;
+import com.dk0124.cdr.persistence.entity.upbit.tick.UpbitTickFactory;
+import com.dk0124.cdr.persistence.repository.upbit.upbitTickRepository.UpbitTickRepository;
+import com.dk0124.cdr.persistence.repositoryPicker.upbit.UpbitTickRepositoryPicker;
 import com.dk0124.cdr.tags.IntegrationWithContainer;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;

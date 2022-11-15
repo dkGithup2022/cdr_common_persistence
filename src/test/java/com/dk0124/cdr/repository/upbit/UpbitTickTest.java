@@ -1,10 +1,10 @@
 package com.dk0124.cdr.repository.upbit;
 
-import com.dk0124.cdr.dto.upbit.tick.UpbitTickDto;
-import com.dk0124.cdr.entity.upbit.tick.UpbitTick;
-import com.dk0124.cdr.entity.upbit.tick.UpbitTickFactory;
-import com.dk0124.cdr.entity.upbit.tick.coins.UpbitTickKrwDot;
-import com.dk0124.cdr.repository.upbit.upbitTickRepository.UpbitTickKrwDotRepository;
+import com.dk0124.cdr.persistence.dto.upbit.tick.UpbitTickDto;
+import com.dk0124.cdr.persistence.entity.upbit.tick.UpbitTick;
+import com.dk0124.cdr.persistence.entity.upbit.tick.UpbitTickFactory;
+import com.dk0124.cdr.persistence.entity.upbit.tick.coins.UpbitTickKrwDot;
+import com.dk0124.cdr.persistence.repository.upbit.upbitTickRepository.UpbitTickKrwDotRepository;
 import com.dk0124.cdr.tags.IntegrationWithContainer;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
