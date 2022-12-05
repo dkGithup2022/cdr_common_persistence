@@ -1,6 +1,8 @@
 package com.dk0124.cdr.entity.upbit.tick;
 
 import com.dk0124.cdr.constants.coinCode.UpbitCoinCode.UpbitCoinCode;
+import com.dk0124.cdr.persistence.entity.upbit.tick.UpbitTick;
+import com.dk0124.cdr.persistence.entity.upbit.tick.UpbitTickFactory;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;

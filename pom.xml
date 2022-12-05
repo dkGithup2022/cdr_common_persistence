@@ -14,7 +14,7 @@
 
     <groupId>com.dk0124.cdr</groupId>
     <artifactId>cdr_common_persistence_1.0</artifactId>
-    <version>1.0</version>
+    <version>1.0-api</version>
 
     <dependencies>
         <dependency>
@@ -104,6 +104,8 @@
         <java.version>11</java.version>
         <maven.compiler.source>11</maven.compiler.source>
         <maven.compiler.target>11</maven.compiler.target>
+        <project.build.sourceEncoding>utf-8</project.build.sourceEncoding>
+        <project.reporting.outputEncoding>utf-8</project.reporting.outputEncoding>
     </properties>
 
 </project>

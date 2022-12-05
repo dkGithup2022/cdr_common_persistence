@@ -1,7 +1,8 @@
 package com.dk0124.cdr.mapper.bithumb;
 
-import com.dk0124.cdr.dto.bithumb.tick.BithumbTickDto;
-import com.dk0124.cdr.entity.bithumb.tick.BithumbTick;
+import com.dk0124.cdr.persistence.dto.bithumb.tick.BithumbTickDto;
+import com.dk0124.cdr.persistence.entity.bithumb.tick.BithumbTick;
+import com.dk0124.cdr.persistence.mapper.bithumb.BithumbTickMapper;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
