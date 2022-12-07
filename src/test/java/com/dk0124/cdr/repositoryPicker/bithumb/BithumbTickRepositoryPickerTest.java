@@ -73,7 +73,7 @@ class BithumbTickRepositoryPickerTest {
                 bithumbTickRepositoryPicker.getRepositoryFromCode(BithumbCoinCode.KRW_ADA);
 
         PageRequest pageRequest = PageRequest.of(0, 200, Sort.by("timestamp").descending());
-        List<BithumbTick> list = repo.findByTimestampLessThanEqual(500L, pageRequest);
+        List<BithumbTick> list = repo.findByTimestampLessThanEqual(500L, pageRequest).getContent();
 
 
         System.out.println(list);
@@ -92,7 +92,7 @@ class BithumbTickRepositoryPickerTest {
                 bithumbTickRepositoryPicker.getRepositoryFromCode(BithumbCoinCode.KRW_ADA);
 
         PageRequest pageRequest = PageRequest.of(0, 200, Sort.by("timestamp").descending());
-        List<BithumbTick> list = repo.findByTimestampLessThanEqual(100L, pageRequest);
+        List<BithumbTick> list = repo.findByTimestampLessThanEqual(100L, pageRequest).getContent();
 
 
         System.out.println(list);
@@ -111,7 +111,7 @@ class BithumbTickRepositoryPickerTest {
                 bithumbTickRepositoryPicker.getRepositoryFromCode(BithumbCoinCode.KRW_ADA);
 
         PageRequest pageRequest = PageRequest.of(0, 200, Sort.by("timestamp").descending());
-        List<BithumbTick> list = repo.findByTimestampLessThanEqual(-1L, pageRequest);
+        List<BithumbTick> list = repo.findByTimestampLessThanEqual(-1L, pageRequest).getContent();
 
 
         System.out.println(list);

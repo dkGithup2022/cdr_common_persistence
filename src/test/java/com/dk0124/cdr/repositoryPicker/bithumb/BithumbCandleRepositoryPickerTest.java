@@ -76,7 +76,7 @@ class BithumbCandleRepositoryPickerTest {
                 bithumbCandleRepositoryPicker.getRepositoryFromCode(BithumbCoinCode.KRW_ADA);
 
         PageRequest pageRequest = PageRequest.of(0, 200, Sort.by("timestamp").descending());
-        List<BithumbCandle> list = repo.findByTimestampLessThanEqual(500L, pageRequest);
+        List<BithumbCandle> list = repo.findByTimestampLessThanEqual(500L, pageRequest).getContent();
         System.out.println(list);
         System.out.println(list.size());
         System.out.println("first: " + list.get(0));
@@ -92,7 +92,7 @@ class BithumbCandleRepositoryPickerTest {
                 bithumbCandleRepositoryPicker.getRepositoryFromCode(BithumbCoinCode.KRW_ADA);
 
         PageRequest pageRequest = PageRequest.of(0, 200, Sort.by("timestamp").descending());
-        List<BithumbCandle> list = repo.findByTimestampLessThanEqual(100L, pageRequest);
+        List<BithumbCandle> list = repo.findByTimestampLessThanEqual(100L, pageRequest).getContent();
 
 
         System.out.println(list);
@@ -112,7 +112,7 @@ class BithumbCandleRepositoryPickerTest {
                 bithumbCandleRepositoryPicker.getRepositoryFromCode(BithumbCoinCode.KRW_ADA);
 
         PageRequest pageRequest = PageRequest.of(0, 200, Sort.by("timestamp").descending());
-        List<BithumbCandle> list = repo.findByTimestampLessThanEqual(-1L, pageRequest);
+        List<BithumbCandle> list = repo.findByTimestampLessThanEqual(-1L, pageRequest).getContent();
 
         assertEquals(0,list.size());
 

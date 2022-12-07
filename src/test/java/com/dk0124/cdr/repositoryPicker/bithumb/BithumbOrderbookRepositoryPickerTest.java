@@ -78,7 +78,7 @@ class BithumbOrderbookRepositoryPickerTest {
                 = bithumbOrderbookRepositoryPicker.getRepositoryFromCode(BithumbCoinCode.KRW_ADA);
 
         PageRequest pageRequest = PageRequest.of(0, 200, Sort.by("datetime").descending());
-        List<BithumbOrderbook> list = repo.findByDatetimeLessThanEqual(500L, pageRequest);
+        List<BithumbOrderbook> list = repo.findByDatetimeLessThanEqual(500L, pageRequest).getContent();
 
 
         System.out.println(list);
@@ -97,7 +97,7 @@ class BithumbOrderbookRepositoryPickerTest {
                 = bithumbOrderbookRepositoryPicker.getRepositoryFromCode(BithumbCoinCode.KRW_ADA);
 
         PageRequest pageRequest = PageRequest.of(0, 200, Sort.by("datetime").descending());
-        List<BithumbOrderbook> list = repo.findByDatetimeLessThanEqual(100L, pageRequest);
+        List<BithumbOrderbook> list = repo.findByDatetimeLessThanEqual(100L, pageRequest).getContent();
 
 
         System.out.println(list);
@@ -118,7 +118,7 @@ class BithumbOrderbookRepositoryPickerTest {
                 = bithumbOrderbookRepositoryPicker.getRepositoryFromCode(BithumbCoinCode.KRW_ADA);
 
         PageRequest pageRequest = PageRequest.of(0, 200, Sort.by("datetime").descending());
-        List<BithumbOrderbook> list = repo.findByDatetimeLessThanEqual(-1L, pageRequest);
+        List<BithumbOrderbook> list = repo.findByDatetimeLessThanEqual(-1L, pageRequest).getContent();
 
         assertEquals(0,list.size());
 

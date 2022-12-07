@@ -12,6 +12,7 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
 import org.springframework.transaction.annotation.Transactional;
@@ -72,14 +73,10 @@ class UpbitTickRepositoryPickerTest {
 
 
         PageRequest pageRequest = PageRequest.of(0, 200, Sort.by("timestamp").descending());
-        List<UpbitTick> list = repo.findByTimestampLessThanEqual(500L, pageRequest);
+        Page< UpbitTick> list = repo.findByTimestampLessThanEqual(500L, pageRequest);
 
 
-        System.out.println(list);
-        System.out.println(list.size());
-        System.out.println("first: " + list.get(0));
-        System.out.println("last: " + list.get(list.size() - 1));
-        assertEquals(200,list.size());
+        assertEquals(200,list.getContent().size());
     }
 
     private void save1000Ticks() {
