@@ -22,8 +22,7 @@ public class UpbitCandleDto {
     private Long timestamp;
 
     @NotNull
-    @JsonProperty("cd")
-    @JsonAlias({"code","market"})
+    @JsonAlias({"code","market","cd"})
     private String market;
 
     @Temporal(TemporalType.TIMESTAMP)
