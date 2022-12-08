@@ -14,13 +14,12 @@ import java.util.List;
 @Setter
 @ToString
 public class BithumbOrderbookDto {
-    @JsonProperty("datetime")
+    @JsonAlias("datetime")
     private Long datetime;
 
-    @JsonProperty("code")
-    @JsonAlias("symbol")
+    @JsonAlias({"symbol","code"})
     private String code;
 
-    @JsonProperty("orderbookUnit")
+    @JsonAlias("orderbookUnit")
     private List<BithumbOrderbookUnit> orderbookUnits;
 }

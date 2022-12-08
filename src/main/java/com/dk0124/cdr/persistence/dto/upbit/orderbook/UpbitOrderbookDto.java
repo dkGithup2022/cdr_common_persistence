@@ -16,20 +16,19 @@ import java.util.List;
 @ToString
 public class UpbitOrderbookDto {
     @NotNull
-    @JsonProperty("market")
-    @JsonAlias("code")
+    @JsonAlias({"code","market"})
     private String code;
 
     @NotNull
-    @JsonProperty("timestamp")
+    @JsonAlias("timestamp")
     private Long timestamp;
 
-    @JsonProperty("total_ask_size")
+    @JsonAlias("total_ask_size")
     private Double totalAskSize;
 
-    @JsonProperty("total_bid_size")
+    @JsonAlias("total_bid_size")
     private Double totalBidSize;
 
-    @JsonProperty("orderbook_units")
+    @JsonAlias("orderbook_units")
     private List<OrderBookUnit> orderBookUnits;
 }

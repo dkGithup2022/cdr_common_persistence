@@ -1,6 +1,7 @@
 package com.dk0124.cdr.persistence.entity.upbit.orderbook;
 
 
+import com.fasterxml.jackson.annotation.JsonAlias;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.*;
 
@@ -12,13 +13,13 @@ import java.io.Serializable;
 @Setter
 @AllArgsConstructor
 public class OrderBookUnit implements Serializable {
-    @JsonProperty("ask_price")
+    @JsonAlias("ask_price")
     private Double askPrice;
-    @JsonProperty("bid_price")
+    @JsonAlias("bid_price")
     private Double bidPrice;
 
-    @JsonProperty("ask_size")
+    @JsonAlias("ask_size")
     private Double askSize;
-    @JsonProperty("bid_size")
+    @JsonAlias("bid_size")
     private Double bidSize;
 }

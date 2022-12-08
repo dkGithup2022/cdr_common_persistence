@@ -4,6 +4,7 @@ package com.dk0124.cdr.persistence.dto.upbit.tick;
 import com.dk0124.cdr.persistence.entity.upbit.CallType;
 import com.fasterxml.jackson.annotation.JsonAlias;
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.sun.istack.NotNull;
 import lombok.*;
@@ -19,63 +20,50 @@ import java.util.Date;
 public class UpbitTickDto {
 
     @NotNull
-    @JsonProperty("sid")
-    @JsonAlias("sequential_id")
+    @JsonAlias({"sequential_id","sid"})
     private Long sequentialId;
 
-    @JsonProperty("cd")
-    @JsonAlias({"code","market"})
+    @JsonAlias({"code","market","cd"})
     private String code;
 
-    @JsonProperty("ty")
-    @JsonAlias("type")
+    @JsonAlias({"type","ty"})
     private String type;
 
-    @JsonProperty("tp")
-    @JsonAlias("trade_price")
+    @JsonAlias({"trade_price","tp"})
     private Double tradePrice;
 
-    @JsonProperty("tv")
-    @JsonAlias("trade_volume")
+    @JsonAlias({"trade_volume","tv"})
     private Double tradeVolume;
 
-    @JsonProperty("ab")
-    @JsonAlias("ask_bid")
+    @JsonAlias({"ask_bid","ab"})
     private String askBid;
 
-    @JsonProperty("pcp")
-    @JsonAlias("prev_closing_price")
+    @JsonAlias({"prev_closing_price","pcp"})
     private Double prev_closing_price;
 
-    @JsonProperty("c")
-    @JsonAlias("change")
+    @JsonAlias({"change","c"})
     private String change;
 
-    @JsonProperty("cp")
-    @JsonAlias("change_price")
+    @JsonAlias({"change_price","cp"})
     private Double change_price;
 
-    @JsonProperty("td")
-    @JsonAlias({"trade_date","trade_date_utc"})
+    @JsonAlias({"trade_date","trade_date_utc","td"})
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
     private Date tradeDateUtc;
 
-    @JsonProperty("ttm")
-    @JsonAlias({"trade_time","trade_time_utc"})
+    @JsonAlias({"trade_time","trade_time_utc","ttm"})
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "HH:mm:ss")
     private Date tradeTimeUtc;
 
-    @JsonProperty("ttms")
-    @JsonAlias("trade_timestamp")
+    @JsonAlias({"trade_timestamp","ttms"})
     private Long tradeTimestamp;
 
-    @JsonProperty("tms")
-    @JsonAlias("timestamp")
+    @JsonAlias({"timestamp","tms"})
     private Long timestamp;
 
-    @JsonProperty("st")
-    @JsonAlias("stream_type")
+    @JsonAlias({"stream_type","st"})
     private String streamType;
 
+    @JsonIgnore
     private CallType callType;
 }

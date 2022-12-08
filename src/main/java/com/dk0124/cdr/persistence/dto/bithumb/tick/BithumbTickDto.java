@@ -14,27 +14,27 @@ import java.util.Date;
 @Getter
 @Setter
 public class BithumbTickDto {
-    @JsonProperty("code")
-    @JsonAlias("symbol")
+
+    @JsonAlias({"symbol","code"})
     private String code;
 
-    @JsonProperty("buySellGb")
+    @JsonAlias("buySellGb")
     private int buySellGb;
 
-    @JsonProperty("contPrice")
+    @JsonAlias("contPrice")
     private Double contPrice;
 
-    @JsonProperty("contQty")
+    @JsonAlias("contQty")
     private Double contQty;
 
-    @JsonProperty("contAmt")
+    @JsonAlias("contAmt")
     private Double contAmt;
 
-    @JsonProperty ("contDtm")
+    @JsonAlias ("contDtm")
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss.SSSSSS")
     private Date contDtm;
 
-    @JsonProperty ("updn")
+    @JsonAlias ("updn")
     private String dpdn;
 
     // 생성된 값 .
