@@ -39,13 +39,13 @@ public class UpbitTickDto {
     private String askBid;
 
     @JsonAlias({"prev_closing_price","pcp"})
-    private Double prev_closing_price;
+    private Double prevClosingPrice;
 
     @JsonAlias({"change","c"})
     private String change;
 
     @JsonAlias({"change_price","cp"})
-    private Double change_price;
+    private Double changePrice;
 
     @JsonAlias({"trade_date","trade_date_utc","td"})
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
