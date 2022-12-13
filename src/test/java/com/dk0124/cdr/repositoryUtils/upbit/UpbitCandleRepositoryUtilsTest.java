@@ -3,7 +3,7 @@ package com.dk0124.cdr.repositoryUtils.upbit;
 import com.dk0124.cdr.constants.coinCode.UpbitCoinCode.UpbitCoinCode;
 import com.dk0124.cdr.persistence.entity.upbit.candle.UpbitCandle;
 import com.dk0124.cdr.persistence.entity.upbit.candle.UpbitCandleUtils;
-import com.dk0124.cdr.persistence.repository.upbit.upbitCandleRepository.UpbitCandleCommonJpaInterface;
+import com.dk0124.cdr.persistence.repository.upbit.upbitCandleRepository.UpbitCandleRepository;
 import com.dk0124.cdr.persistence.repositoryUtils.upbit.UpbitCandleRepositoryUtils;
 import com.dk0124.cdr.tags.IntegrationWithContainer;
 import org.junit.jupiter.api.Disabled;
@@ -47,7 +47,7 @@ class UpbitCandleRepositoryUtilsTest {
     @DisplayName("UpbitCandleRepositoryPicker.getRepositoryFromCode(UpbitCoinCode code) 테스트")
     @MethodSource("get_each_typed_upbit_candles")
     void getRepositoryFromCode(UpbitCandle c) {
-        UpbitCandleCommonJpaInterface repository = upbitTickRepositoryPicker.getRepositoryFromCode(UpbitCoinCode.fromString(c.getMarket()));
+        UpbitCandleRepository repository = upbitTickRepositoryPicker.getRepositoryFromCode(UpbitCoinCode.fromString(c.getMarket()));
         UpbitCandle saved = repository.save(c);
         assertNotNull(saved);
         assertEquals(c.getClass(), saved.getClass());
@@ -73,7 +73,7 @@ class UpbitCandleRepositoryUtilsTest {
     void functionCreationWithPagable() {
         save1000Candles();
 
-        UpbitCandleCommonJpaInterface repo =
+        UpbitCandleRepository repo =
                 upbitTickRepositoryPicker.getRepositoryFromCode(UpbitCoinCode.KRW_ADA);
 
 
@@ -90,7 +90,7 @@ class UpbitCandleRepositoryUtilsTest {
     void functionCreationWithPagable2() {
         save1000Candles();
 
-        UpbitCandleCommonJpaInterface repo =
+        UpbitCandleRepository repo =
                 upbitTickRepositoryPicker.getRepositoryFromCode(UpbitCoinCode.KRW_ADA);
 
 
@@ -108,7 +108,7 @@ class UpbitCandleRepositoryUtilsTest {
     void functionCreationWithPagable3() {
         save1000Candles();
 
-        UpbitCandleCommonJpaInterface repo =
+        UpbitCandleRepository repo =
                 upbitTickRepositoryPicker.getRepositoryFromCode(UpbitCoinCode.KRW_ADA);
 
 
@@ -130,7 +130,7 @@ class UpbitCandleRepositoryUtilsTest {
                     .timestamp(Long.valueOf(i))
                     .market(UpbitCoinCode.KRW_ADA.toString())
                     .build();
-            UpbitCandleCommonJpaInterface repo =
+            UpbitCandleRepository repo =
                     upbitTickRepositoryPicker.getRepositoryFromCode(UpbitCoinCode.KRW_ADA);
             repo.save(UpbitCandleUtils.of(candle));
         }

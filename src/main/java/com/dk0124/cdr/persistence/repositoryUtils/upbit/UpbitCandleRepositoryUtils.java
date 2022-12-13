@@ -34,7 +34,7 @@ public class UpbitCandleRepositoryUtils {
     private final UpbitCandleKrwStxRepository upbitCandleKrwStxRepository;
     private final UpbitCandleKrwXrpRepository upbitCandleKrwXrpRepository;
 
-    public UpbitCandleCommonJpaInterface getRepositoryFromCode(UpbitCoinCode code) {
+    public UpbitCandleRepository getRepositoryFromCode(UpbitCoinCode code) {
         switch (code) {
             case KRW_BTC:
                 return upbitCandleKrwBtcRepository;

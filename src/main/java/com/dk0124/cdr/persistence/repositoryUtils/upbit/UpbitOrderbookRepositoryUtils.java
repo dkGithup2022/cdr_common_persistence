@@ -35,7 +35,7 @@ public class UpbitOrderbookRepositoryUtils {
     private final UpbitOrderbookKrwStxRepository upbitOrderbookKrwStxRepository;
     private final UpbitOrderbookKrwXrpRepository upbitOrderbookKrwXrpRepository;
 
-    public UpbitOrderbookCommonRepository getRepositoryFromCode(UpbitCoinCode code) {
+    public UpbitOrderbookRepository getRepositoryFromCode(UpbitCoinCode code) {
         switch (code) {
             case KRW_ADA:
                 return upbitOrderbookKrwAdaRepository;

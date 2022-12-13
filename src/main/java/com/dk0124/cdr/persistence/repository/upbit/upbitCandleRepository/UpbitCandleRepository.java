@@ -6,7 +6,7 @@ import org.springframework.data.domain.Pageable;
 
 import java.util.List;
 
-public interface UpbitCandleCommonJpaInterface {
+public interface UpbitCandleRepository {
     UpbitCandle save(UpbitCandle candle);
     UpbitCandle findOneByTimestamp(long timestamp);
     Page<UpbitCandle> findByTimestampLessThanEqual(Long timestamp, Pageable pageable);

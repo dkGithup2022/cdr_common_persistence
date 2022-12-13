@@ -3,7 +3,7 @@ package com.dk0124.cdr.repositoryUtils.upbit;
 import com.dk0124.cdr.constants.coinCode.UpbitCoinCode.UpbitCoinCode;
 import com.dk0124.cdr.persistence.entity.upbit.orderbook.UpbitOrderBookUtils;
 import com.dk0124.cdr.persistence.entity.upbit.orderbook.UpbitOrderbook;
-import com.dk0124.cdr.persistence.repository.upbit.upbitOrderBookRepository.UpbitOrderbookCommonRepository;
+import com.dk0124.cdr.persistence.repository.upbit.upbitOrderBookRepository.UpbitOrderbookRepository;
 import com.dk0124.cdr.persistence.repository.upbit.upbitOrderBookRepository.UpbitOrderbookKrwAdaRepository;
 import com.dk0124.cdr.persistence.repositoryUtils.upbit.UpbitOrderbookRepositoryUtils;
 import com.dk0124.cdr.tags.IntegrationWithContainer;
@@ -45,7 +45,7 @@ class UpbitOrderbookRepositoryUtilsTest {
     @DisplayName("UpbitOrderbookRepositoryPicker.getRepositoryFromCode(UpbitCoinCode code) 테스트")
     @MethodSource("get_each_typed_upbit_orderbook")
     void get_repository_from_code(UpbitOrderbook book){
-        UpbitOrderbookCommonRepository repository = upbitOrderbookRepositoryUtils.getRepositoryFromCode(UpbitCoinCode.fromString(book.getCode()));
+        UpbitOrderbookRepository repository = upbitOrderbookRepositoryUtils.getRepositoryFromCode(UpbitCoinCode.fromString(book.getCode()));
         UpbitOrderbook saved = repository.save(book);
         assertNotNull(saved);
         assertEquals(book.getClass(),saved.getClass());
@@ -72,7 +72,7 @@ class UpbitOrderbookRepositoryUtilsTest {
         save1000Orderbooks();
 
 
-        UpbitOrderbookCommonRepository repo
+        UpbitOrderbookRepository repo
                 = upbitOrderbookRepositoryUtils.getRepositoryFromCode(UpbitCoinCode.KRW_ADA);
 
 
@@ -93,7 +93,7 @@ class UpbitOrderbookRepositoryUtilsTest {
                             .timestamp(Long.valueOf(i))
                             .code(UpbitCoinCode.KRW_ADA.toString())
                             .build();
-            UpbitOrderbookCommonRepository repo
+            UpbitOrderbookRepository repo
                     = upbitOrderbookRepositoryUtils.getRepositoryFromCode(UpbitCoinCode.KRW_ADA);
 
             repo.save(UpbitOrderBookUtils.of(upbitOrderbook));

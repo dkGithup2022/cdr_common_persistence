@@ -3,5 +3,5 @@ package com.dk0124.cdr.persistence.repository.upbit.upbitCandleRepository;
 import com.dk0124.cdr.persistence.entity.upbit.candle.coin.UpbitCandleKrwEtc;
 import org.springframework.data.jpa.repository.JpaRepository;
 
-public interface UpbitCandleKrwEtcRepository extends JpaRepository<UpbitCandleKrwEtc, Long>, UpbitCandleCommonJpaInterface {
+public interface UpbitCandleKrwEtcRepository extends JpaRepository<UpbitCandleKrwEtc, Long>, UpbitCandleRepository {
 }

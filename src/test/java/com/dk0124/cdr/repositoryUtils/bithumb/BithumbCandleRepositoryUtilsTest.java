@@ -5,7 +5,7 @@ import com.dk0124.cdr.persistence.dto.bithumb.candle.BithumbCandleDto;
 import com.dk0124.cdr.persistence.entity.bithumb.candle.BithumbCandle;
 import com.dk0124.cdr.persistence.entity.bithumb.candle.BithumbCandleUtils;
 import com.dk0124.cdr.persistence.mapper.bithumb.BithumbCandleMapper;
-import com.dk0124.cdr.persistence.repository.bithumb.bithumbCandleRepository.BithumbCandleCommonJpaInterface;
+import com.dk0124.cdr.persistence.repository.bithumb.bithumbCandleRepository.BithumbCandleRepository;
 import com.dk0124.cdr.persistence.repositoryUtils.bithumb.BithumbCandleRepositoryUtils;
 import com.dk0124.cdr.tags.IntegrationWithContainer;
 import org.junit.jupiter.api.DisplayName;
@@ -21,7 +21,6 @@ import org.testcontainers.containers.PostgreSQLContainer;
 import org.testcontainers.junit.jupiter.Container;
 
 import java.util.Arrays;
-import java.util.Date;
 import java.util.List;
 import java.util.stream.Stream;
 
@@ -48,7 +47,7 @@ class BithumbCandleRepositoryUtilsTest {
     @DisplayName("BithumbCandleRepositoryPicker.getRepositoryFromCode(UpbitCoinCode code) 테스트")
     @MethodSource("get_each_bithumb_candles")
     void getRepositoryFromCode(BithumbCandle c) {
-        BithumbCandleCommonJpaInterface repository = bithumbCandleRepositoryUtils.getRepositoryFromCode(BithumbCoinCode.fromString(c.getCode()));
+        BithumbCandleRepository repository = bithumbCandleRepositoryUtils.getRepositoryFromCode(BithumbCoinCode.fromString(c.getCode()));
         BithumbCandle saved = repository.save(c);
         assertNotNull(saved);
         assertEquals(c.getClass(), saved.getClass());
@@ -73,7 +72,7 @@ class BithumbCandleRepositoryUtilsTest {
     void functionCreationWithPagable() {
         save1000Candles();
 
-        BithumbCandleCommonJpaInterface repo =
+        BithumbCandleRepository repo =
                 bithumbCandleRepositoryUtils.getRepositoryFromCode(BithumbCoinCode.KRW_ADA);
 
         PageRequest pageRequest = PageRequest.of(0, 200, Sort.by("timestamp").descending());
@@ -89,7 +88,7 @@ class BithumbCandleRepositoryUtilsTest {
     void functionCreationWithPagabl2() {
         save1000Candles();
 
-        BithumbCandleCommonJpaInterface repo =
+        BithumbCandleRepository repo =
                 bithumbCandleRepositoryUtils.getRepositoryFromCode(BithumbCoinCode.KRW_ADA);
 
         PageRequest pageRequest = PageRequest.of(0, 200, Sort.by("timestamp").descending());
@@ -109,7 +108,7 @@ class BithumbCandleRepositoryUtilsTest {
     void functionCreationWithPagabl3() {
         save1000Candles();
 
-        BithumbCandleCommonJpaInterface repo =
+        BithumbCandleRepository repo =
                 bithumbCandleRepositoryUtils.getRepositoryFromCode(BithumbCoinCode.KRW_ADA);
 
         PageRequest pageRequest = PageRequest.of(0, 200, Sort.by("timestamp").descending());
@@ -127,7 +126,7 @@ class BithumbCandleRepositoryUtilsTest {
                     .timestamp(Long.valueOf(i))
                     .build();
 
-            BithumbCandleCommonJpaInterface repo =
+            BithumbCandleRepository repo =
                     bithumbCandleRepositoryUtils.getRepositoryFromCode(BithumbCoinCode.fromString(dto.getCode()));
             repo.save(BithumbCandleUtils.of(bithumbCandleMapper.mapCandle(dto)));
         }

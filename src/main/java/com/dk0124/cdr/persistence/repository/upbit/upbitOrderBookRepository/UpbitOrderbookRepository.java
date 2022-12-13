@@ -7,7 +7,7 @@ import org.springframework.data.domain.Pageable;
 
 import java.util.List;
 
-public interface UpbitOrderbookCommonRepository{
+public interface UpbitOrderbookRepository {
     UpbitOrderbook save(UpbitOrderbook upbitOrderbook);
     UpbitOrderbook findOneByTimestamp(Long timestamp);
     Page<UpbitOrderbook> findByTimestampLessThanEqual(Long timestamp, Pageable pageable);

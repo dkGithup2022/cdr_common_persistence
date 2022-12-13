@@ -4,7 +4,7 @@ import com.dk0124.cdr.constants.coinCode.bithumbCoinCode.BithumbCoinCode;
 import com.dk0124.cdr.persistence.dto.bithumb.candle.BithumbCandleDto;
 import com.dk0124.cdr.persistence.entity.bithumb.candle.BithumbCandleUtils;
 import com.dk0124.cdr.persistence.mapper.bithumb.BithumbCandleMapper;
-import com.dk0124.cdr.persistence.repository.bithumb.bithumbCandleRepository.BithumbCandleCommonJpaInterface;
+import com.dk0124.cdr.persistence.repository.bithumb.bithumbCandleRepository.BithumbCandleRepository;
 import com.dk0124.cdr.persistence.repositoryUtils.bithumb.BithumbCandleRepositoryUtils;
 import com.dk0124.cdr.tags.IntegrationWithContainer;
 import org.junit.jupiter.api.DisplayName;
@@ -57,7 +57,7 @@ public class BithumbCandleTest {
                     .code(BithumbCoinCode.KRW_ADA.toString())
                     .timestamp(Long.valueOf(i))
                     .build();
-            BithumbCandleCommonJpaInterface repo =
+            BithumbCandleRepository repo =
                     bithumbCandleRepositoryUtils.getRepositoryFromCode(BithumbCoinCode.fromString(dto.getCode()));
             repo.save(BithumbCandleUtils.of(bithumbCandleMapper.mapCandle(dto)));
         }

@@ -34,7 +34,7 @@ public class BithumbOrderbookRepositoryUtils {
     private final BithumbOrderbookKrwSrmRepository bithumbOrderbookKrwSrmRepository;
     private final BithumbOrderbookKrwXrpRepository bithumbOrderbookKrwXrpRepository;
 
-    public BithumbOrderbookCommonJpaInterface getRepositoryFromCode(BithumbCoinCode code) {
+    public BithumbOrderbookRepository getRepositoryFromCode(BithumbCoinCode code) {
         switch (code) {
             case KRW_ADA:
                 return bithumbOrderbookKrwAdaRepository;

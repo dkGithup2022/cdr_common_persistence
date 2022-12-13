@@ -33,7 +33,7 @@ public class BithumbCandleRepositoryUtils {
     private final BithumbCandleKrwSrmRepository bithumbCandleKrwSrmRepository;
     private final BithumbCandleKrwXrpRepository bithumbCandleKrwXrpRepository;
 
-    public BithumbCandleCommonJpaInterface getRepositoryFromCode(BithumbCoinCode code) {
+    public BithumbCandleRepository getRepositoryFromCode(BithumbCoinCode code) {
         switch (code) {
             case KRW_ADA:
                 return bithumbCandleKrwAdaRepository;
