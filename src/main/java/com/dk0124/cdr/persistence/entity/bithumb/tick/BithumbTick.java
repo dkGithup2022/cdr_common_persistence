@@ -78,22 +78,4 @@ public class BithumbTick implements Ticks {
         }
     }
 
- /*
- public static PersonBuilder builder() {
-        return new CustomPersonBuilder();
-    }
-
-
- private static class CustomPersonBuilder extends PersonBuilder {
-
-     @Override
-     public Person build() {
-         // Validates required fields
-         Validate.notBlank(super.name, "Persons NAME cannot be null or empty!");
-         return super.build();
-     }
-
- }
-
-  */
 }
