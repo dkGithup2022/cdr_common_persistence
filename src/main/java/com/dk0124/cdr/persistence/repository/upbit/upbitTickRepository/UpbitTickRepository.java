@@ -9,9 +9,7 @@ import java.util.List;
 
 public interface UpbitTickRepository {
     UpbitTick save(UpbitTick upbitTick);
-
     UpbitTick findBySequentialId(Long sequentialId);
     List<UpbitTick> findByTimestampBetweenOrderByTimestampDesc(Long old, Long now);
-
     Page<UpbitTick> findByTimestampLessThanEqual(Long timestamp, Pageable pageable);
 }

@@ -4,5 +4,5 @@ import com.dk0124.cdr.persistence.entity.upbit.orderbook.coins.UpbitOrderbookKrw
 import org.springframework.data.jpa.repository.JpaRepository;
 
 
-public interface UpbitOrderbookKrwBtcRepository extends UpbitOrderbookCommonRepository, JpaRepository<UpbitOrderbookKrwBtc,Long> {
+public interface UpbitOrderbookKrwBtcRepository extends UpbitOrderbookRepository, JpaRepository<UpbitOrderbookKrwBtc,Long> {
 }

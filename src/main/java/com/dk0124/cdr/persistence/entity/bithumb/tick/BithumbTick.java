@@ -19,43 +19,63 @@ import java.util.Date;
 @Setter
 @EqualsAndHashCode(of = "id")
 public class BithumbTick implements Ticks {
+    // 빌더에 빌드 함수 오버라이드
+    // 생성자 함수 생성
+
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
 
-    @JsonProperty("code")
-    @JsonAlias("symbol")
+    @JsonAlias({"symbol","code"})
     @Column(name = "code")
     private String code;
 
-    @JsonProperty("buySellGb")
+    @JsonAlias("buySellGb")
     @Column(name = "buy_sell_gb")
     private int buySellGb;
 
-    @JsonProperty("contPrice")
+    @JsonAlias("contPrice")
     @Column(name = "cont_price")
     private Double contPrice;
 
-    @JsonProperty("contQty")
+    @JsonAlias("contQty")
     @Column(name = "cont_qty")
     private Double contQty;
 
-    @JsonProperty("contAmt")
+    @JsonAlias("contAmt")
     @Column(name = "cont_amt")
     private Double contAmt;
 
-    @JsonProperty("contDtm")
+    @JsonAlias("contDtm")
     @Column(name = "cont_dtm")
     @Temporal(TemporalType.TIMESTAMP)
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss.SSSSSS")
     private Date contDtm;
 
-    @JsonProperty("updn")
+    @JsonAlias("updn")
     @Column(name = "updn")
     private String dpdn;
 
     // 생성된 값 .
     @Column(name = "timestamp")
     private Long timestamp;
+
+
+    public void setContDtm(Date contDtm) {
+        this.timestamp = contDtm.getTime();
+        this.contDtm = contDtm;
+    }
+
+    public static BithumbTickBuilder builder() {
+        return new CustomBithumbTickBuilder();
+    }
+
+    private static class CustomBithumbTickBuilder extends BithumbTickBuilder{
+        @Override
+        public BithumbTickBuilder contDtm(Date date){
+            this.timestamp(date.getTime());
+            return super.contDtm(date);
+        }
+    }
 
 }

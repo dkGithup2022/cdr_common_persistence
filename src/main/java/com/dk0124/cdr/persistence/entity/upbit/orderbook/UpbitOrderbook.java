@@ -37,21 +37,20 @@ public class UpbitOrderbook implements Serializable, Orderbook {
     private long id;
 
     @NotNull
-    @JsonProperty("market")
-    @JsonAlias("code")
+    @JsonAlias({"code","market"})
     private String code;
 
     @NotNull
-    @JsonProperty("timestamp")
+    @JsonAlias("timestamp")
     private Long timestamp;
 
-    @JsonProperty("total_ask_size")
+    @JsonAlias("total_ask_size")
     private Double totalAskSize;
 
-    @JsonProperty("total_bid_size")
+    @JsonAlias("total_bid_size")
     private Double totalBidSize;
 
-    @JsonProperty("orderbook_units")
+    @JsonAlias("orderbook_units")
     @Type(type = "jsonb")
     @Column(columnDefinition = "json")
     private List<OrderBookUnit> orderBookUnits;

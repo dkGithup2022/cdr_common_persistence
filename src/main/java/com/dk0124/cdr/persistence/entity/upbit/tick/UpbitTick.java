@@ -24,64 +24,51 @@ public class UpbitTick implements Ticks {
 
     @Id
     @NotNull
-    @JsonProperty("sid")
-    @JsonAlias("sequential_id")
+    @JsonAlias({"sequential_id","sid"})
+    // upbit tick 의 아이디 값은 Upbit 에서 제공함.
     private Long sequentialId;
 
-    @JsonProperty("cd")
-    @JsonAlias({"code","market"})
+    @JsonAlias({"code","market","cd"})
     private String code;
 
-    @JsonProperty("ty")
-    @JsonAlias("type")
+    @JsonAlias({"type","ty"})
     private String type;
 
-    @JsonProperty("tp")
-    @JsonAlias("trade_price")
+    @JsonAlias({"trade_price","tp"})
     private Double tradePrice;
 
-    @JsonProperty("tv")
-    @JsonAlias("trade_volume")
+    @JsonAlias({"trade_volume","tv"})
     private Double tradeVolume;
 
-    @JsonProperty("ab")
-    @JsonAlias("ask_bid")
+    @JsonAlias({"ask_bid","ab"})
     private String askBid;
 
-    @JsonProperty("pcp")
-    @JsonAlias("prev_closing_price")
-    private Double prev_closing_price;
+    @JsonAlias({"prev_closing_price",("pcp")})
+    private Double prevClosingPrice;
 
-    @JsonProperty("c")
-    @JsonAlias("change")
+    @JsonAlias({"change","c"})
     private String change;
 
-    @JsonProperty("cp")
-    @JsonAlias("change_price")
-    private Double change_price;
+    @JsonAlias({"change_price","cp"})
+    private Double changePrice;
 
-    @JsonProperty("td")
-    @JsonAlias({"trade_date","trade_date_utc"})
+    @JsonAlias({"trade_date","trade_date_utc","td"})
     @Temporal(TemporalType.DATE)
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
     private Date tradeDateUtc;
 
-    @JsonProperty("ttm")
-    @JsonAlias({"trade_time","trade_time_utc"})
+    @JsonAlias({"trade_time","trade_time_utc","ttm"})
     @Temporal(TemporalType.TIMESTAMP)
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "HH:mm:ss")
     private Date tradeTimeUtc;
 
-    @JsonProperty("ttms")
-    @JsonAlias("trade_timestamp")
+    @JsonAlias({"trade_timestamp","ttms"})
     private Long tradeTimestamp;
 
-    @JsonProperty("tms")
-    @JsonAlias("timestamp")
+    @JsonAlias({"timestamp","tms"})
     private Long timestamp;
 
-    @JsonProperty("st")
-    @JsonAlias("stream_type")
+    @JsonAlias({"stream_type","st"})
     private String streamType;
 
     private CallType callType;

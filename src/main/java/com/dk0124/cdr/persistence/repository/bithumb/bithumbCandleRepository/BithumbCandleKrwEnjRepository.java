@@ -3,5 +3,5 @@ package com.dk0124.cdr.persistence.repository.bithumb.bithumbCandleRepository;
 import com.dk0124.cdr.persistence.entity.bithumb.candle.coins.BithumbCandleKrwEnj;
 import org.springframework.data.jpa.repository.JpaRepository;
 
-public interface BithumbCandleKrwEnjRepository extends JpaRepository<BithumbCandleKrwEnj,Long>,BithumbCandleCommonJpaInterface {
+public interface BithumbCandleKrwEnjRepository extends JpaRepository<BithumbCandleKrwEnj,Long>, BithumbCandleRepository {
 }

@@ -18,4 +18,4 @@ import java.lang.annotation.Target;
 @ActiveProfiles("docker")
 public @interface IntegrationWithoutContainer {
 }
-// 소스 파일에 도커 스크립트랑 쓰세요
+// 소스 파일에 도커 스크립트랑 쓰는 용도 ..

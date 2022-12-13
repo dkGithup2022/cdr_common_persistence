@@ -17,7 +17,7 @@ public class BithumbOrderbookDto {
     @JsonAlias("datetime")
     private Long datetime;
 
-    @JsonAlias({"symbol","code"})
+    @JsonAlias({"symbol", "code"})
     private String code;
 
     @JsonAlias("orderbookUnit")
