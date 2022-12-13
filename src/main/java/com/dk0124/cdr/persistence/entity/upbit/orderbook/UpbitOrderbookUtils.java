@@ -11,13 +11,13 @@ import org.springframework.stereotype.Component;
 
 @Component
 @Slf4j
-public class UpbitOrderBookUtils {
+public class UpbitOrderbookUtils {
 
     //TODO : 빈 객체의  model Mapper 가져오기
     private final static ModelMapper modelMapper = new ModelMapper();
 
     public static UpbitOrderbook of(UpbitOrderbookDto upbitOrderbookDto){
-        return UpbitOrderBookUtils.of(modelMapper.map(upbitOrderbookDto, UpbitOrderbook.class));
+        return UpbitOrderbookUtils.of(modelMapper.map(upbitOrderbookDto, UpbitOrderbook.class));
     }
 
     public static UpbitOrderbook of(UpbitOrderbook upbitOrderbook){

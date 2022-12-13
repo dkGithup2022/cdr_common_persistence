@@ -1,10 +1,7 @@
 package com.dk0124.cdr.repositoryUtils.upbit;
 
 import com.dk0124.cdr.constants.coinCode.UpbitCoinCode.UpbitCoinCode;
-import com.dk0124.cdr.persistence.entity.upbit.orderbook.UpbitOrderBookUtils;
-import com.dk0124.cdr.persistence.entity.upbit.orderbook.UpbitOrderbook;
 import com.dk0124.cdr.persistence.repository.upbit.upbitOrderBookRepository.UpbitOrderbookRepository;
-import com.dk0124.cdr.persistence.repository.upbit.upbitOrderBookRepository.UpbitOrderbookKrwAdaRepository;
 import com.dk0124.cdr.persistence.repositoryUtils.upbit.UpbitOrderbookRepositoryUtils;
 import com.dk0124.cdr.tags.IntegrationWithContainer;
 import org.junit.jupiter.api.DisplayName;
@@ -13,12 +10,7 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Sort;
 import org.springframework.transaction.annotation.Transactional;
-import org.testcontainers.containers.PostgreSQLContainer;
-import org.testcontainers.junit.jupiter.Container;
 
 import java.util.Arrays;
 import java.util.stream.Stream;
@@ -29,6 +21,35 @@ import static org.junit.jupiter.api.Assertions.*;
 @IntegrationWithContainer
 @Transactional
 class UpbitOrderbookRepositoryUtilsTest {
+
+    @Autowired
+    UpbitOrderbookRepositoryUtils upbitOrderbookRepositoryUtils;
+
+    @Test
+    public void empty(){assertNotNull(upbitOrderbookRepositoryUtils);}
+
+    @ParameterizedTest()
+    @DisplayName("UpbitOrderbookRepositoryUtils.getRepositoryFromCode(UpbitCoinCode code) 테스트")
+    @MethodSource("get_all_upbit_codes")
+    public void get_repository_from_code(UpbitCoinCode code){
+        UpbitOrderbookRepository repo = upbitOrderbookRepositoryUtils.getRepositoryFromCode(code);
+        assertNotNull(repo);
+    }
+
+    @ParameterizedTest()
+    @DisplayName("UpbitOrderbookRepositoryUtils.getRepositoryFromCode(String code) 테스트")
+    @MethodSource("get_all_upbit_codes")
+    public void get_repository_from_code_string(UpbitCoinCode code){
+        UpbitOrderbookRepository repo = upbitOrderbookRepositoryUtils.getRepositoryFromCode(code.toString());
+        assertNotNull(repo);
+    }
+
+    static Stream<Arguments> get_all_upbit_codes() {
+        return Arrays.stream(UpbitCoinCode.values()).map(c -> Arguments.of(c));
+    }
+
+    /*
+
     @Container
     static PostgreSQLContainer container = new PostgreSQLContainer().withDatabaseName("studyTest");
     @Autowired
@@ -100,6 +121,8 @@ class UpbitOrderbookRepositoryUtilsTest {
 
         }
     }
+
+*/
 
 
 

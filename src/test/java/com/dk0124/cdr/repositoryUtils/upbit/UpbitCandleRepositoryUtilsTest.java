@@ -1,36 +1,54 @@
 package com.dk0124.cdr.repositoryUtils.upbit;
 
 import com.dk0124.cdr.constants.coinCode.UpbitCoinCode.UpbitCoinCode;
-import com.dk0124.cdr.persistence.entity.upbit.candle.UpbitCandle;
-import com.dk0124.cdr.persistence.entity.upbit.candle.UpbitCandleUtils;
 import com.dk0124.cdr.persistence.repository.upbit.upbitCandleRepository.UpbitCandleRepository;
 import com.dk0124.cdr.persistence.repositoryUtils.upbit.UpbitCandleRepositoryUtils;
 import com.dk0124.cdr.tags.IntegrationWithContainer;
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Sort;
 import org.springframework.transaction.annotation.Transactional;
-import org.testcontainers.containers.PostgreSQLContainer;
-import org.testcontainers.junit.jupiter.Container;
-
 
 import java.util.Arrays;
 import java.util.stream.Stream;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 
 @IntegrationWithContainer
 @Transactional
 class UpbitCandleRepositoryUtilsTest {
+
+    @Autowired
+    UpbitCandleRepositoryUtils upbitCandleRepositoryUtils;
+
+    @Test
+    public void empty(){assertNotNull(upbitCandleRepositoryUtils);}
+
+    @ParameterizedTest()
+    @DisplayName("UpbitCandleRepositoryUtils.getRepositoryFromCode(UpbitCoinCode code) 테스트")
+    @MethodSource("get_all_upbit_codes")
+    public void get_repository_from_code(UpbitCoinCode code){
+        UpbitCandleRepository repo = upbitCandleRepositoryUtils.getRepositoryFromCode(code);
+        assertNotNull(repo);
+    }
+
+    @ParameterizedTest()
+    @DisplayName("UpbitCandleRepositoryUtils.getRepositoryFromCode(String code) 테스트")
+    @MethodSource("get_all_upbit_codes")
+    public void get_repository_from_code_string(UpbitCoinCode code){
+        UpbitCandleRepository repo = upbitCandleRepositoryUtils.getRepositoryFromCode(code.toString());
+        assertNotNull(repo);
+    }
+
+    static Stream<Arguments> get_all_upbit_codes() {
+        return Arrays.stream(UpbitCoinCode.values()).map(c -> Arguments.of(c));
+    }
+
+    /*
     @Container
     static PostgreSQLContainer container = new PostgreSQLContainer().withDatabaseName("studyTest");
 
@@ -46,8 +64,18 @@ class UpbitCandleRepositoryUtilsTest {
     @ParameterizedTest()
     @DisplayName("UpbitCandleRepositoryPicker.getRepositoryFromCode(UpbitCoinCode code) 테스트")
     @MethodSource("get_each_typed_upbit_candles")
-    void getRepositoryFromCode(UpbitCandle c) {
+    void get_repository_from_code_code(UpbitCandle c) {
         UpbitCandleRepository repository = upbitTickRepositoryPicker.getRepositoryFromCode(UpbitCoinCode.fromString(c.getMarket()));
+        UpbitCandle saved = repository.save(c);
+        assertNotNull(saved);
+        assertEquals(c.getClass(), saved.getClass());
+    }
+
+    @ParameterizedTest()
+    @DisplayName("UpbitCandleRepositoryPicker.getRepositoryFromCode(String code) 테스트")
+    @MethodSource("get_each_typed_upbit_candles")
+    void get_repository_from_code_string(UpbitCandle c) {
+        UpbitCandleRepository repository = upbitTickRepositoryPicker.getRepositoryFromCode(c.getMarket());
         UpbitCandle saved = repository.save(c);
         assertNotNull(saved);
         assertEquals(c.getClass(), saved.getClass());
@@ -70,7 +98,7 @@ class UpbitCandleRepositoryUtilsTest {
     @Test
     @DisplayName("기능 테스트, timestamp 기준 creation query 테스트 / 200 개 요청 성공 ")
     @Disabled
-    void functionCreationWithPagable() {
+    void test_query_creation_less_than_timestamp() {
         save1000Candles();
 
         UpbitCandleRepository repo =
@@ -135,5 +163,6 @@ class UpbitCandleRepositoryUtilsTest {
             repo.save(UpbitCandleUtils.of(candle));
         }
     }
+    */
 
 }

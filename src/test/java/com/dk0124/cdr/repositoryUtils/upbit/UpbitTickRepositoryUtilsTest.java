@@ -3,7 +3,9 @@ package com.dk0124.cdr.repositoryUtils.upbit;
 import com.dk0124.cdr.constants.coinCode.UpbitCoinCode.UpbitCoinCode;
 import com.dk0124.cdr.persistence.entity.upbit.tick.UpbitTick;
 import com.dk0124.cdr.persistence.entity.upbit.tick.UpbitTickUtils;
+import com.dk0124.cdr.persistence.repository.upbit.upbitCandleRepository.UpbitCandleRepository;
 import com.dk0124.cdr.persistence.repository.upbit.upbitTickRepository.UpbitTickRepository;
+import com.dk0124.cdr.persistence.repositoryUtils.upbit.UpbitCandleRepositoryUtils;
 import com.dk0124.cdr.persistence.repositoryUtils.upbit.UpbitTickRepositoryUtils;
 import com.dk0124.cdr.tags.IntegrationWithContainer;
 import org.junit.jupiter.api.DisplayName;
@@ -27,6 +29,33 @@ import static org.junit.jupiter.api.Assertions.*;
 @IntegrationWithContainer
 @Transactional
 class UpbitTickRepositoryUtilsTest {
+
+    @Autowired
+    UpbitTickRepositoryUtils upbitTickRepositoryUtils;
+
+    @Test
+    public void empty(){assertNotNull(upbitTickRepositoryUtils);}
+
+    @ParameterizedTest()
+    @DisplayName("UpbitTickRepositoryUtils.getRepositoryFromCode(UpbitCoinCode code) 테스트")
+    @MethodSource("get_all_upbit_codes")
+    public void get_repository_from_code(UpbitCoinCode code){
+        UpbitTickRepository repo = upbitTickRepositoryUtils.getRepositoryFromCode(code);
+        assertNotNull(repo);
+    }
+
+    @ParameterizedTest()
+    @DisplayName("UpbitTickRepositoryUtils.getRepositoryFromCode(String code) 테스트")
+    @MethodSource("get_all_upbit_codes")
+    public void get_repository_from_code_string(UpbitCoinCode code){
+        UpbitTickRepository repo = upbitTickRepositoryUtils.getRepositoryFromCode(code.toString());
+        assertNotNull(repo);
+    }
+
+    static Stream<Arguments> get_all_upbit_codes() {
+        return Arrays.stream(UpbitCoinCode.values()).map(c -> Arguments.of(c));
+    }
+    /*
     @Container
     static PostgreSQLContainer container = new PostgreSQLContainer().withDatabaseName("studyTest");
     @Autowired
@@ -94,5 +123,6 @@ class UpbitTickRepositoryUtilsTest {
             repo.save(UpbitTickUtils.of(upbitTick));
         }
     }
+     */
 
 }
