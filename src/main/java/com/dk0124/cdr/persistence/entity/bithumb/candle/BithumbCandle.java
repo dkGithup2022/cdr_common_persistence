@@ -9,18 +9,8 @@ import javax.persistence.*;
 @AllArgsConstructor @NoArgsConstructor
 @Builder @Getter @Setter
 @EqualsAndHashCode(of = "id")
+@ToString
 public class BithumbCandle  implements Candle {
-
-    public BithumbCandle(String code, Long timestamp, Double openingPrice, Double closingPrice, Double highPrice, Double lowPrice, Double tradeAmount) {
-        this.code = code;
-        this.timestamp = timestamp;
-        this.openingPrice = openingPrice;
-        this.closingPrice = closingPrice;
-        this.highPrice = highPrice;
-        this.lowPrice = lowPrice;
-        this.tradeAmount = tradeAmount;
-    }
-
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
@@ -46,17 +36,4 @@ public class BithumbCandle  implements Candle {
     @Column(name = "trade_amount")
     private Double tradeAmount;
 
-    @Override
-    public String toString() {
-        return "BithumbCandle{" +
-                "id=" + id +
-                ", code='" + code + '\'' +
-                ", timestamp=" + timestamp +
-                ", openingPrice=" + openingPrice +
-                ", closingPrice=" + closingPrice +
-                ", highPrice=" + highPrice +
-                ", lowPrice=" + lowPrice +
-                ", tradeAmount=" + tradeAmount +
-                '}';
-    }
 }

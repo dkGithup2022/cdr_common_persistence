@@ -36,7 +36,7 @@ public class UpbitTickTest {
         //given
         UpbitTickDto dto = UpbitTickDto
                 .builder()
-                .code("KRW-BTC").timestamp(1L).sequentialId(10L)
+                .code("KRW-BTC").timestamp(1L)
                 .build();
 
         UpbitTick entity = mapper.map(dto,UpbitTick.class);
@@ -58,7 +58,7 @@ public class UpbitTickTest {
         //given
         UpbitTickDto dto = UpbitTickDto
                 .builder()
-                .code("KRW-DOT").timestamp(1L).sequentialId(10L)
+                .code("KRW-DOT").timestamp(1L)
                 .build();
 
         UpbitTick entity = mapper.map(dto,UpbitTick.class);
@@ -79,7 +79,7 @@ public class UpbitTickTest {
         //given
         UpbitTickDto dto = UpbitTickDto
                 .builder()
-                .code("KRW-DOT").timestamp(1L).sequentialId(10L)
+                .code("KRW-DOT").timestamp(1L)
                 .build();
 
         UpbitTick entity = mapper.map(dto,UpbitTick.class);

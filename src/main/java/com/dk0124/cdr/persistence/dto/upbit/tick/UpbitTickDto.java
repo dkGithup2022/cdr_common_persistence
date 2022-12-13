@@ -19,9 +19,15 @@ import java.util.Date;
 @ToString
 public class UpbitTickDto {
 
-    @NotNull
-    @JsonAlias({"sequential_id","sid"})
-    private Long sequentialId;
+    /*
+    TODO
+        1) sequential id 삭제 (o)
+        2) type 필요한지 확인 (o)
+        3) timestamp, tradetimestamp 둘 중 하나만 쓰기(o)
+        4) CALL TYPE 삭제 (o)
+        5) stream type 삭제.
+
+     */
 
     @JsonAlias({"code","market","cd"})
     private String code;
@@ -55,15 +61,9 @@ public class UpbitTickDto {
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "HH:mm:ss")
     private Date tradeTimeUtc;
 
-    @JsonAlias({"trade_timestamp","ttms"})
-    private Long tradeTimestamp;
-
     @JsonAlias({"timestamp","tms"})
     private Long timestamp;
 
     @JsonAlias({"stream_type","st"})
     private String streamType;
-
-    @JsonIgnore
-    private CallType callType;
 }

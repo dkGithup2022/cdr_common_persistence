@@ -1,5 +1,6 @@
 package com.dk0124.cdr.persistence.entity.bithumb.orderbook;
 
+import com.fasterxml.jackson.annotation.JsonAlias;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.*;
 
@@ -14,19 +15,20 @@ import javax.persistence.Column;
 @EqualsAndHashCode
 public class BithumbOrderbookUnit {
 
-    @JsonProperty("orderType")
+    @JsonAlias("orderType")
     @Column(name = "order_type")
     private String orderType;
 
-    @JsonProperty("price")
+    @JsonAlias("price")
     @Column(name = "price")
     private Double price;
 
-    @JsonProperty("quantity")
+    @JsonAlias("quantity")
     @Column(name = "quantity")
-    private Double quantity;;
+    private Double quantity;
 
-    @JsonProperty("total")
+
+    @JsonAlias("total")
     @Column(name = "total")
     private Double total;
 

@@ -13,36 +13,30 @@ import javax.persistence.*;
 import java.util.List;
 
 @MappedSuperclass
-@AllArgsConstructor @NoArgsConstructor
+@AllArgsConstructor
+@NoArgsConstructor
 @Builder
 @Getter
 @Setter
 @ToString
 @EqualsAndHashCode(of = "id")
 @TypeDef(name = "jsonb", typeClass = JsonBinaryType.class)
-public class BithumbOrderbook  implements Orderbook {
+public class BithumbOrderbook implements Orderbook {
 
-    public BithumbOrderbook(Long datetime, String code,List<BithumbOrderbookUnit> orderbookUnits){
-        this.datetime = datetime;
-        this.code = code;
-        this.orderbookUnits = orderbookUnits;
-    }
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
 
-
     @JsonProperty("datetime")
     @Column(name = "datetime")
     private Long datetime;
 
-    @JsonProperty("code")
-    @JsonAlias("symbol")
+    @JsonAlias({"symbol", "code"})
     @Column(name = "code")
     private String code;
 
-    @JsonProperty("orderbookUnit")
+    @JsonAlias("orderbookUnit")
     @Type(type = "jsonb")
     @Column(name = "orderbook_unit", columnDefinition = "json")
     private List<BithumbOrderbookUnit> orderbookUnits;
