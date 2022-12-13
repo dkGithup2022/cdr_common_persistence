@@ -1,4 +1,4 @@
-package com.dk0124.cdr.persistence.repositoryPicker.upbit;
+package com.dk0124.cdr.persistence.repositoryUtils.upbit;
 
 
 import com.dk0124.cdr.constants.coinCode.UpbitCoinCode.UpbitCoinCode;
@@ -10,7 +10,7 @@ import org.springframework.stereotype.Component;
 @Component
 @RequiredArgsConstructor
 @Slf4j
-public class UpbitOrderbookRepositoryPicker {
+public class UpbitOrderbookRepositoryUtils {
     private final UpbitOrderbookKrwAdaRepository upbitOrderbookKrwAdaRepository;
     private final UpbitOrderbookKrwAtomRepository upbitOrderbookKrwAtomRepository;
     private final UpbitOrderbookKrwAvaxRepository upbitOrderbookKrwAvaxRepository;

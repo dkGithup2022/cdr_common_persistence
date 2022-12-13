@@ -6,7 +6,7 @@ import com.dk0124.cdr.persistence.entity.upbit.candle.coin.*;
 import com.dk0124.cdr.persistence.entity.upbit.candle.coin.*;
 import org.modelmapper.ModelMapper;
 
-public class UpbitCandleFactory {
+public class UpbitCandleUtils {
     private final static ModelMapper modelMapper = new ModelMapper();
 
     public static UpbitCandle of(UpbitCandle candle) {

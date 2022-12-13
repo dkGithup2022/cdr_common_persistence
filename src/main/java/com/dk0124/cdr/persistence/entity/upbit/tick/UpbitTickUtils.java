@@ -10,15 +10,13 @@ import org.springframework.stereotype.Component;
 
 @Component
 @Slf4j
-public class UpbitTickFactory {
+public class UpbitTickUtils {
     //TODO : 빈 객체의  model Mapper 가져오기
     private final static ModelMapper modelMapper = new ModelMapper();
-
 
     public static UpbitTick of(UpbitTick upbitTick){
         UpbitCoinCode upbitCoinCode =UpbitCoinCode.fromString( upbitTick.getCode());
         switch (upbitCoinCode){
-
             case KRW_ADA:
                 return modelMapper.map(upbitTick, UpbitTickKrwAda.class);
             case KRW_ATOM:

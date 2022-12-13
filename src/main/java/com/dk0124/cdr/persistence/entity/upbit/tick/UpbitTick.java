@@ -25,6 +25,7 @@ public class UpbitTick implements Ticks {
     @Id
     @NotNull
     @JsonAlias({"sequential_id","sid"})
+    // upbit tick 의 아이디 값은 Upbit 에서 제공함.
     private Long sequentialId;
 
     @JsonAlias({"code","market","cd"})

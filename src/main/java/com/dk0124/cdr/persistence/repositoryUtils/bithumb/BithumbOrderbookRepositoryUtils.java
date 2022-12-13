@@ -1,4 +1,4 @@
-package com.dk0124.cdr.persistence.repositoryPicker.bithumb;
+package com.dk0124.cdr.persistence.repositoryUtils.bithumb;
 
 
 import com.dk0124.cdr.constants.coinCode.bithumbCoinCode.BithumbCoinCode;
@@ -10,7 +10,7 @@ import org.springframework.stereotype.Component;
 @Component
 @RequiredArgsConstructor
 @Slf4j
-public class BithumbOrderbookRepositoryPicker {
+public class BithumbOrderbookRepositoryUtils {
 
     private final BithumbOrderbookKrwDotRepository bithumbOrderbookKrwDotRepository;
     private final BithumbOrderbookKrwSolRepository bithumbOrderbookKrwSolRepository;

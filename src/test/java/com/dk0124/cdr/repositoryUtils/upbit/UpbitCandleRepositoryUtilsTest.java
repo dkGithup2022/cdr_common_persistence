@@ -1,10 +1,10 @@
-package com.dk0124.cdr.repositoryPicker.upbit;
+package com.dk0124.cdr.repositoryUtils.upbit;
 
 import com.dk0124.cdr.constants.coinCode.UpbitCoinCode.UpbitCoinCode;
 import com.dk0124.cdr.persistence.entity.upbit.candle.UpbitCandle;
-import com.dk0124.cdr.persistence.entity.upbit.candle.UpbitCandleFactory;
+import com.dk0124.cdr.persistence.entity.upbit.candle.UpbitCandleUtils;
 import com.dk0124.cdr.persistence.repository.upbit.upbitCandleRepository.UpbitCandleCommonJpaInterface;
-import com.dk0124.cdr.persistence.repositoryPicker.upbit.UpbitCandleRepositoryPicker;
+import com.dk0124.cdr.persistence.repositoryUtils.upbit.UpbitCandleRepositoryUtils;
 import com.dk0124.cdr.tags.IntegrationWithContainer;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.DisplayName;
@@ -22,7 +22,6 @@ import org.testcontainers.junit.jupiter.Container;
 
 
 import java.util.Arrays;
-import java.util.List;
 import java.util.stream.Stream;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -31,12 +30,12 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 @IntegrationWithContainer
 @Transactional
-class UpbitCandleRepositoryPickerTest {
+class UpbitCandleRepositoryUtilsTest {
     @Container
     static PostgreSQLContainer container = new PostgreSQLContainer().withDatabaseName("studyTest");
 
     @Autowired
-    UpbitCandleRepositoryPicker upbitTickRepositoryPicker;
+    UpbitCandleRepositoryUtils upbitTickRepositoryPicker;
 
     @Test
     void empty() {
@@ -63,7 +62,7 @@ class UpbitCandleRepositoryPickerTest {
                     .market(codes[i].toString())
                     .timestamp(Long.valueOf(i))
                     .build();
-            candles[i] = UpbitCandleFactory.of(c);
+            candles[i] = UpbitCandleUtils.of(c);
         }
         return Arrays.stream(candles).map(c -> Arguments.of(c));
     }
@@ -133,7 +132,7 @@ class UpbitCandleRepositoryPickerTest {
                     .build();
             UpbitCandleCommonJpaInterface repo =
                     upbitTickRepositoryPicker.getRepositoryFromCode(UpbitCoinCode.KRW_ADA);
-            repo.save(UpbitCandleFactory.of(candle));
+            repo.save(UpbitCandleUtils.of(candle));
         }
     }
 

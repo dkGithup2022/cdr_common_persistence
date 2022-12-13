@@ -2,10 +2,10 @@ package com.dk0124.cdr.repository.bithumb;
 
 import com.dk0124.cdr.constants.coinCode.bithumbCoinCode.BithumbCoinCode;
 import com.dk0124.cdr.persistence.dto.bithumb.candle.BithumbCandleDto;
-import com.dk0124.cdr.persistence.entity.bithumb.candle.BithumbCandleFactory;
+import com.dk0124.cdr.persistence.entity.bithumb.candle.BithumbCandleUtils;
 import com.dk0124.cdr.persistence.mapper.bithumb.BithumbCandleMapper;
 import com.dk0124.cdr.persistence.repository.bithumb.bithumbCandleRepository.BithumbCandleCommonJpaInterface;
-import com.dk0124.cdr.persistence.repositoryPicker.bithumb.BithumbCandleRepositoryPicker;
+import com.dk0124.cdr.persistence.repositoryUtils.bithumb.BithumbCandleRepositoryUtils;
 import com.dk0124.cdr.tags.IntegrationWithContainer;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -19,7 +19,7 @@ public class BithumbCandleTest {
     static PostgreSQLContainer container = new PostgreSQLContainer().withDatabaseName("studyTest");
 
     @Autowired
-    BithumbCandleRepositoryPicker bithumbCandleRepositoryPicker;
+    BithumbCandleRepositoryUtils bithumbCandleRepositoryUtils;
 
     @Autowired
     BithumbCandleMapper bithumbCandleMapper;
@@ -58,8 +58,8 @@ public class BithumbCandleTest {
                     .timestamp(Long.valueOf(i))
                     .build();
             BithumbCandleCommonJpaInterface repo =
-                    bithumbCandleRepositoryPicker.getRepositoryFromCode(BithumbCoinCode.fromString(dto.getCode()));
-            repo.save(BithumbCandleFactory.of(bithumbCandleMapper.mapCandle(dto)));
+                    bithumbCandleRepositoryUtils.getRepositoryFromCode(BithumbCoinCode.fromString(dto.getCode()));
+            repo.save(BithumbCandleUtils.of(bithumbCandleMapper.mapCandle(dto)));
         }
         //when
 

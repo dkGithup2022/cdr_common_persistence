@@ -1,12 +1,12 @@
-package com.dk0124.cdr.repositoryPicker.bithumb;
+package com.dk0124.cdr.repositoryUtils.bithumb;
 
 import com.dk0124.cdr.constants.coinCode.bithumbCoinCode.BithumbCoinCode;
 import com.dk0124.cdr.persistence.dto.bithumb.candle.BithumbCandleDto;
 import com.dk0124.cdr.persistence.entity.bithumb.candle.BithumbCandle;
-import com.dk0124.cdr.persistence.entity.bithumb.candle.BithumbCandleFactory;
+import com.dk0124.cdr.persistence.entity.bithumb.candle.BithumbCandleUtils;
 import com.dk0124.cdr.persistence.mapper.bithumb.BithumbCandleMapper;
 import com.dk0124.cdr.persistence.repository.bithumb.bithumbCandleRepository.BithumbCandleCommonJpaInterface;
-import com.dk0124.cdr.persistence.repositoryPicker.bithumb.BithumbCandleRepositoryPicker;
+import com.dk0124.cdr.persistence.repositoryUtils.bithumb.BithumbCandleRepositoryUtils;
 import com.dk0124.cdr.tags.IntegrationWithContainer;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -21,6 +21,7 @@ import org.testcontainers.containers.PostgreSQLContainer;
 import org.testcontainers.junit.jupiter.Container;
 
 import java.util.Arrays;
+import java.util.Date;
 import java.util.List;
 import java.util.stream.Stream;
 
@@ -28,26 +29,26 @@ import static org.junit.jupiter.api.Assertions.*;
 
 @IntegrationWithContainer
 @Transactional
-class BithumbCandleRepositoryPickerTest {
+class BithumbCandleRepositoryUtilsTest {
     @Container
     static PostgreSQLContainer container = new PostgreSQLContainer().withDatabaseName("studyTest");
 
     @Autowired
-    BithumbCandleRepositoryPicker bithumbCandleRepositoryPicker;
+    BithumbCandleRepositoryUtils bithumbCandleRepositoryUtils;
 
     @Autowired
     BithumbCandleMapper bithumbCandleMapper;
 
     @Test
     void empty() {
-        assertNotNull(bithumbCandleRepositoryPicker);
+        assertNotNull(bithumbCandleRepositoryUtils);
     }
 
     @ParameterizedTest()
     @DisplayName("BithumbCandleRepositoryPicker.getRepositoryFromCode(UpbitCoinCode code) 테스트")
     @MethodSource("get_each_bithumb_candles")
     void getRepositoryFromCode(BithumbCandle c) {
-        BithumbCandleCommonJpaInterface repository = bithumbCandleRepositoryPicker.getRepositoryFromCode(BithumbCoinCode.fromString(c.getCode()));
+        BithumbCandleCommonJpaInterface repository = bithumbCandleRepositoryUtils.getRepositoryFromCode(BithumbCoinCode.fromString(c.getCode()));
         BithumbCandle saved = repository.save(c);
         assertNotNull(saved);
         assertEquals(c.getClass(), saved.getClass());
@@ -62,7 +63,7 @@ class BithumbCandleRepositoryPickerTest {
                     .code(codes[i].toString())
                     .timestamp(Long.valueOf(i))
                     .build();
-            candles[i] = BithumbCandleFactory.of(c);
+            candles[i] = BithumbCandleUtils.of(c);
         }
         return Arrays.stream(candles).map(c -> Arguments.of(c));
     }
@@ -73,7 +74,7 @@ class BithumbCandleRepositoryPickerTest {
         save1000Candles();
 
         BithumbCandleCommonJpaInterface repo =
-                bithumbCandleRepositoryPicker.getRepositoryFromCode(BithumbCoinCode.KRW_ADA);
+                bithumbCandleRepositoryUtils.getRepositoryFromCode(BithumbCoinCode.KRW_ADA);
 
         PageRequest pageRequest = PageRequest.of(0, 200, Sort.by("timestamp").descending());
         List<BithumbCandle> list = repo.findByTimestampLessThanEqual(500L, pageRequest).getContent();
@@ -89,7 +90,7 @@ class BithumbCandleRepositoryPickerTest {
         save1000Candles();
 
         BithumbCandleCommonJpaInterface repo =
-                bithumbCandleRepositoryPicker.getRepositoryFromCode(BithumbCoinCode.KRW_ADA);
+                bithumbCandleRepositoryUtils.getRepositoryFromCode(BithumbCoinCode.KRW_ADA);
 
         PageRequest pageRequest = PageRequest.of(0, 200, Sort.by("timestamp").descending());
         List<BithumbCandle> list = repo.findByTimestampLessThanEqual(100L, pageRequest).getContent();
@@ -109,7 +110,7 @@ class BithumbCandleRepositoryPickerTest {
         save1000Candles();
 
         BithumbCandleCommonJpaInterface repo =
-                bithumbCandleRepositoryPicker.getRepositoryFromCode(BithumbCoinCode.KRW_ADA);
+                bithumbCandleRepositoryUtils.getRepositoryFromCode(BithumbCoinCode.KRW_ADA);
 
         PageRequest pageRequest = PageRequest.of(0, 200, Sort.by("timestamp").descending());
         List<BithumbCandle> list = repo.findByTimestampLessThanEqual(-1L, pageRequest).getContent();
@@ -127,8 +128,8 @@ class BithumbCandleRepositoryPickerTest {
                     .build();
 
             BithumbCandleCommonJpaInterface repo =
-                    bithumbCandleRepositoryPicker.getRepositoryFromCode(BithumbCoinCode.fromString(dto.getCode()));
-            repo.save(BithumbCandleFactory.of(bithumbCandleMapper.mapCandle(dto)));
+                    bithumbCandleRepositoryUtils.getRepositoryFromCode(BithumbCoinCode.fromString(dto.getCode()));
+            repo.save(BithumbCandleUtils.of(bithumbCandleMapper.mapCandle(dto)));
         }
     }
 

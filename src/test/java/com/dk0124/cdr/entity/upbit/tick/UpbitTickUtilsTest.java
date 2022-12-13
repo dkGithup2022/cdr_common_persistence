@@ -2,7 +2,7 @@ package com.dk0124.cdr.entity.upbit.tick;
 
 import com.dk0124.cdr.constants.coinCode.UpbitCoinCode.UpbitCoinCode;
 import com.dk0124.cdr.persistence.entity.upbit.tick.UpbitTick;
-import com.dk0124.cdr.persistence.entity.upbit.tick.UpbitTickFactory;
+import com.dk0124.cdr.persistence.entity.upbit.tick.UpbitTickUtils;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -14,7 +14,7 @@ import java.util.stream.Stream;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-class UpbitTickFactoryTest {
+class UpbitTickUtilsTest {
     @Test
     void empty(){ }
 
@@ -22,7 +22,7 @@ class UpbitTickFactoryTest {
     @DisplayName("UpbitTickFactory.of(abstract tick) 객체 생성 결과 확인하기  ")
     @MethodSource("get_each_upbit_ticks")
     void update_event_dto_to_event(UpbitTick tick){
-        UpbitTick realTick = UpbitTickFactory.of(tick);
+        UpbitTick realTick = UpbitTickUtils.of(tick);
 
         String realTickClassName = realTick.getClass().toString();
         String inputCode = tick.getCode();

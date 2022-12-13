@@ -10,7 +10,7 @@ import org.springframework.stereotype.Component;
 
 @Component
 @Slf4j
-public class UpbitOrderBookFactory {
+public class UpbitOrderBookUtils {
 
     //TODO : 빈 객체의  model Mapper 가져오기
     private final static ModelMapper modelMapper = new ModelMapper();

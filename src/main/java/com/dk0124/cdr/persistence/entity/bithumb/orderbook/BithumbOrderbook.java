@@ -23,7 +23,6 @@ import java.util.List;
 @TypeDef(name = "jsonb", typeClass = JsonBinaryType.class)
 public class BithumbOrderbook implements Orderbook {
 
-
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;

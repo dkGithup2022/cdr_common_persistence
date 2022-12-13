@@ -1,4 +1,4 @@
-package com.dk0124.cdr.persistence.repositoryPicker.upbit;
+package com.dk0124.cdr.persistence.repositoryUtils.upbit;
 
 import com.dk0124.cdr.constants.coinCode.UpbitCoinCode.UpbitCoinCode;
 import com.dk0124.cdr.persistence.repository.upbit.upbitCandleRepository.*;
@@ -9,7 +9,7 @@ import org.springframework.stereotype.Component;
 @RequiredArgsConstructor
 @Component
 @Slf4j
-public class UpbitCandleRepositoryPicker {
+public class UpbitCandleRepositoryUtils {
     private final UpbitCandleKrwBtcRepository upbitCandleKrwBtcRepository;
     private final UpbitCandleKrwAdaRepository upbitCandleKrwAdaRepository;
     private final UpbitCandleKrwAtomRepository upbitCandleKrwAtomRepository;

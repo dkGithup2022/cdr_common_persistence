@@ -8,7 +8,7 @@ import org.springframework.stereotype.Component;
 
 @Component
 @Slf4j
-public class BithumbCandleFactory {
+public class BithumbCandleUtils {
     private final static ModelMapper modelMapper = new ModelMapper();
     public static BithumbCandle of(BithumbCandle bithumbCandle){
         BithumbCoinCode bithumbCoinCode = BithumbCoinCode.fromString(bithumbCandle.getCode());

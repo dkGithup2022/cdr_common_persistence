@@ -2,7 +2,7 @@ package com.dk0124.cdr.repository.upbit;
 
 import com.dk0124.cdr.persistence.dto.upbit.tick.UpbitTickDto;
 import com.dk0124.cdr.persistence.entity.upbit.tick.UpbitTick;
-import com.dk0124.cdr.persistence.entity.upbit.tick.UpbitTickFactory;
+import com.dk0124.cdr.persistence.entity.upbit.tick.UpbitTickUtils;
 import com.dk0124.cdr.persistence.entity.upbit.tick.coins.UpbitTickKrwDot;
 import com.dk0124.cdr.persistence.repository.upbit.upbitTickRepository.UpbitTickKrwDotRepository;
 import com.dk0124.cdr.tags.IntegrationWithContainer;
@@ -40,10 +40,12 @@ public class UpbitTickTest {
                 .build();
 
         UpbitTick entity = mapper.map(dto,UpbitTick.class);
-        entity = UpbitTickFactory.of(entity);
+        entity = UpbitTickUtils.of(entity);
+        entity.setSequentialId(1L);
 
         //when
         UpbitTick result = upbitTickKrwDotRepository.save(entity);
+
 
         //then
         System.out.println("first : " +  entity.toString());
@@ -62,8 +64,8 @@ public class UpbitTickTest {
                 .build();
 
         UpbitTick entity = mapper.map(dto,UpbitTick.class);
-        entity = UpbitTickFactory.of(entity);
-
+        entity = UpbitTickUtils.of(entity);
+        entity.setSequentialId(1L);
         UpbitTick saved = upbitTickKrwDotRepository.save(entity);
 
         //when
@@ -83,7 +85,8 @@ public class UpbitTickTest {
                 .build();
 
         UpbitTick entity = mapper.map(dto,UpbitTick.class);
-        entity = UpbitTickFactory.of(entity);
+        entity = UpbitTickUtils.of(entity);
+        entity.setSequentialId(1L);
 
         //when
         UpbitTick saved = upbitTickKrwDotRepository.save(entity);

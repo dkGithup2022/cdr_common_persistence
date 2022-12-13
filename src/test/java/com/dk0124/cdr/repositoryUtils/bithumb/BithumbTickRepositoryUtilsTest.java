@@ -1,10 +1,10 @@
-package com.dk0124.cdr.repositoryPicker.bithumb;
+package com.dk0124.cdr.repositoryUtils.bithumb;
 
 import com.dk0124.cdr.constants.coinCode.bithumbCoinCode.BithumbCoinCode;
 import com.dk0124.cdr.persistence.entity.bithumb.tick.BithumbTick;
-import com.dk0124.cdr.persistence.entity.bithumb.tick.BithumbTickFactory;
+import com.dk0124.cdr.persistence.entity.bithumb.tick.BithumbTickUtils;
 import com.dk0124.cdr.persistence.repository.bithumb.bithumbTickRepository.BithumbTickCommonJpaInterface;
-import com.dk0124.cdr.persistence.repositoryPicker.bithumb.BithumbTickRepositoryPicker;
+import com.dk0124.cdr.persistence.repositoryUtils.bithumb.BithumbTickRepositoryUtils;
 import com.dk0124.cdr.tags.IntegrationWithContainer;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -19,6 +19,7 @@ import org.testcontainers.containers.PostgreSQLContainer;
 import org.testcontainers.junit.jupiter.Container;
 
 import java.util.Arrays;
+import java.util.Date;
 import java.util.List;
 import java.util.stream.Stream;
 
@@ -27,29 +28,27 @@ import static org.junit.jupiter.api.Assertions.*;
 
 @IntegrationWithContainer
 @Transactional
-class BithumbTickRepositoryPickerTest {
+class BithumbTickRepositoryUtilsTest {
 
     @Container
     static PostgreSQLContainer container = new PostgreSQLContainer().withDatabaseName("studyTest");
 
     @Autowired
-    BithumbTickRepositoryPicker bithumbTickRepositoryPicker;
-
-
+    BithumbTickRepositoryUtils bithumbTickRepositoryUtils;
 
     @Test
-    void empty(){assertNotNull(bithumbTickRepositoryPicker);}
+    void empty(){assertNotNull(bithumbTickRepositoryUtils);}
 
     @ParameterizedTest()
     @DisplayName("BithumbTickRepositoryPicker.getRepositoryFromCode(UpbitCoinCode code) 테스트")
     @MethodSource("get_each_typed_upbit_candles")
     void getRepositoryFromCode(BithumbTick t){
-       BithumbTickCommonJpaInterface repository = bithumbTickRepositoryPicker.getRepositoryFromCode(BithumbCoinCode.fromString(t.getCode()));
+       BithumbTickCommonJpaInterface repository =
+               bithumbTickRepositoryUtils.getRepositoryFromCode(BithumbCoinCode.fromString(t.getCode()));
         BithumbTick saved = repository.save(t);
         assertNotNull(saved);
         assertEquals(t.getClass(),saved.getClass());
     }
-
 
     static Stream<Arguments> get_each_typed_upbit_candles() {
         BithumbCoinCode[] codes = BithumbCoinCode.values();
@@ -57,9 +56,10 @@ class BithumbTickRepositoryPickerTest {
         for(int i =0 ; i< ticks.length ; i++){
             BithumbTick c = BithumbTick.builder()
                     .code(codes[i].toString())
+                    .contDtm(new Date())
                     .timestamp(Long.valueOf(i))
                     .build();
-            ticks[i] = BithumbTickFactory.of(c);
+            ticks[i] = BithumbTickUtils.of(c);
         }
         return Arrays.stream(ticks).map(t->Arguments.of(t));
     }
@@ -70,7 +70,7 @@ class BithumbTickRepositoryPickerTest {
         save1000Ticks();
 
         BithumbTickCommonJpaInterface repo =
-                bithumbTickRepositoryPicker.getRepositoryFromCode(BithumbCoinCode.KRW_ADA);
+                bithumbTickRepositoryUtils.getRepositoryFromCode(BithumbCoinCode.KRW_ADA);
 
         PageRequest pageRequest = PageRequest.of(0, 200, Sort.by("timestamp").descending());
         List<BithumbTick> list = repo.findByTimestampLessThanEqual(500L, pageRequest).getContent();
@@ -89,7 +89,7 @@ class BithumbTickRepositoryPickerTest {
         save1000Ticks();
 
         BithumbTickCommonJpaInterface repo =
-                bithumbTickRepositoryPicker.getRepositoryFromCode(BithumbCoinCode.KRW_ADA);
+                bithumbTickRepositoryUtils.getRepositoryFromCode(BithumbCoinCode.KRW_ADA);
 
         PageRequest pageRequest = PageRequest.of(0, 200, Sort.by("timestamp").descending());
         List<BithumbTick> list = repo.findByTimestampLessThanEqual(100L, pageRequest).getContent();
@@ -108,11 +108,10 @@ class BithumbTickRepositoryPickerTest {
         save1000Ticks();
 
         BithumbTickCommonJpaInterface repo =
-                bithumbTickRepositoryPicker.getRepositoryFromCode(BithumbCoinCode.KRW_ADA);
+                bithumbTickRepositoryUtils.getRepositoryFromCode(BithumbCoinCode.KRW_ADA);
 
         PageRequest pageRequest = PageRequest.of(0, 200, Sort.by("timestamp").descending());
         List<BithumbTick> list = repo.findByTimestampLessThanEqual(-1L, pageRequest).getContent();
-
 
         System.out.println(list);
         System.out.println(list.size());
@@ -123,19 +122,14 @@ class BithumbTickRepositoryPickerTest {
 
     private void save1000Ticks() {
         for (int i = 0; i < 1000; i++) {
-
             BithumbTick bithumbTick = BithumbTick.builder()
                     .code(BithumbCoinCode.KRW_ADA.toString())
+                    .contDtm(new Date())
                     .timestamp(Long.valueOf(i))
                     .build();
-
-
             BithumbTickCommonJpaInterface repo =
-                    bithumbTickRepositoryPicker.getRepositoryFromCode(BithumbCoinCode.KRW_ADA);
-
-            repo.save(BithumbTickFactory.of(bithumbTick));
+                    bithumbTickRepositoryUtils.getRepositoryFromCode(BithumbCoinCode.KRW_ADA);
+            repo.save(BithumbTickUtils.of(bithumbTick));
         }
     }
-
-
 }

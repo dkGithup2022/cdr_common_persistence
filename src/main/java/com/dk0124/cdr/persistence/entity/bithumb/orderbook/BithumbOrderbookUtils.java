@@ -8,7 +8,7 @@ import org.springframework.stereotype.Component;
 
 @Component
 @Slf4j
-public class BithumbOrderbookFactory {
+public class BithumbOrderbookUtils {
     private final static ModelMapper modelMapper = new ModelMapper();
 
 

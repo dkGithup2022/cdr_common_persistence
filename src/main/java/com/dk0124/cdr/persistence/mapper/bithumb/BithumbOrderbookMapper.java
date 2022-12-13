@@ -2,7 +2,7 @@ package com.dk0124.cdr.persistence.mapper.bithumb;
 
 import com.dk0124.cdr.persistence.dto.bithumb.orderbook.BithumbOrderbookDto;
 import com.dk0124.cdr.persistence.entity.bithumb.orderbook.BithumbOrderbook;
-import com.dk0124.cdr.persistence.entity.bithumb.orderbook.BithumbOrderbookFactory;
+import com.dk0124.cdr.persistence.entity.bithumb.orderbook.BithumbOrderbookUtils;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Component;
@@ -14,6 +14,6 @@ public class BithumbOrderbookMapper {
     public BithumbOrderbook mapOrderbook(BithumbOrderbookDto dto){
         if(dto.getCode().isBlank())
             throw new IllegalArgumentException("can not convert dto with empty code : " + dto.toString());
-        return BithumbOrderbookFactory.of(mapper.map(dto, BithumbOrderbook.class));
+        return BithumbOrderbookUtils.of(mapper.map(dto, BithumbOrderbook.class));
     }
 }

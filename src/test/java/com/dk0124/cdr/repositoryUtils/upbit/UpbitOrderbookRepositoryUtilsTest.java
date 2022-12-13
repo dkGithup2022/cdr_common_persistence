@@ -1,11 +1,11 @@
-package com.dk0124.cdr.repositoryPicker.upbit;
+package com.dk0124.cdr.repositoryUtils.upbit;
 
 import com.dk0124.cdr.constants.coinCode.UpbitCoinCode.UpbitCoinCode;
-import com.dk0124.cdr.persistence.entity.upbit.orderbook.UpbitOrderBookFactory;
+import com.dk0124.cdr.persistence.entity.upbit.orderbook.UpbitOrderBookUtils;
 import com.dk0124.cdr.persistence.entity.upbit.orderbook.UpbitOrderbook;
 import com.dk0124.cdr.persistence.repository.upbit.upbitOrderBookRepository.UpbitOrderbookCommonRepository;
 import com.dk0124.cdr.persistence.repository.upbit.upbitOrderBookRepository.UpbitOrderbookKrwAdaRepository;
-import com.dk0124.cdr.persistence.repositoryPicker.upbit.UpbitOrderbookRepositoryPicker;
+import com.dk0124.cdr.persistence.repositoryUtils.upbit.UpbitOrderbookRepositoryUtils;
 import com.dk0124.cdr.tags.IntegrationWithContainer;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -21,7 +21,6 @@ import org.testcontainers.containers.PostgreSQLContainer;
 import org.testcontainers.junit.jupiter.Container;
 
 import java.util.Arrays;
-import java.util.List;
 import java.util.stream.Stream;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -29,24 +28,24 @@ import static org.junit.jupiter.api.Assertions.*;
 
 @IntegrationWithContainer
 @Transactional
-class UpbitOrderbookRepositoryPickerTest {
+class UpbitOrderbookRepositoryUtilsTest {
     @Container
     static PostgreSQLContainer container = new PostgreSQLContainer().withDatabaseName("studyTest");
     @Autowired
-    UpbitOrderbookRepositoryPicker upbitOrderbookRepositoryPicker;
+    UpbitOrderbookRepositoryUtils upbitOrderbookRepositoryUtils;
     @Autowired
     UpbitOrderbookKrwAdaRepository upbitOrderbookKrwAdaRepository;
 
     @Test
     void empty(){
-        assertNotNull(upbitOrderbookRepositoryPicker);
+        assertNotNull(upbitOrderbookRepositoryUtils);
     }
 
     @ParameterizedTest()
     @DisplayName("UpbitOrderbookRepositoryPicker.getRepositoryFromCode(UpbitCoinCode code) 테스트")
     @MethodSource("get_each_typed_upbit_orderbook")
     void get_repository_from_code(UpbitOrderbook book){
-        UpbitOrderbookCommonRepository repository = upbitOrderbookRepositoryPicker.getRepositoryFromCode(UpbitCoinCode.fromString(book.getCode()));
+        UpbitOrderbookCommonRepository repository = upbitOrderbookRepositoryUtils.getRepositoryFromCode(UpbitCoinCode.fromString(book.getCode()));
         UpbitOrderbook saved = repository.save(book);
         assertNotNull(saved);
         assertEquals(book.getClass(),saved.getClass());
@@ -62,7 +61,7 @@ class UpbitOrderbookRepositoryPickerTest {
                     .code(codes[i].toString())
                     .timestamp(Long.valueOf(i))
                     .build();
-            books[i] = UpbitOrderBookFactory.of(o);
+            books[i] = UpbitOrderBookUtils.of(o);
         }
         return  Arrays.stream(books).map(o->Arguments.of(o));
     }
@@ -74,7 +73,7 @@ class UpbitOrderbookRepositoryPickerTest {
 
 
         UpbitOrderbookCommonRepository repo
-                = upbitOrderbookRepositoryPicker.getRepositoryFromCode(UpbitCoinCode.KRW_ADA);
+                = upbitOrderbookRepositoryUtils.getRepositoryFromCode(UpbitCoinCode.KRW_ADA);
 
 
         PageRequest pageRequest = PageRequest.of(0, 200, Sort.by("timestamp").descending());
@@ -95,9 +94,9 @@ class UpbitOrderbookRepositoryPickerTest {
                             .code(UpbitCoinCode.KRW_ADA.toString())
                             .build();
             UpbitOrderbookCommonRepository repo
-                    = upbitOrderbookRepositoryPicker.getRepositoryFromCode(UpbitCoinCode.KRW_ADA);
+                    = upbitOrderbookRepositoryUtils.getRepositoryFromCode(UpbitCoinCode.KRW_ADA);
 
-            repo.save(UpbitOrderBookFactory.of(upbitOrderbook));
+            repo.save(UpbitOrderBookUtils.of(upbitOrderbook));
 
         }
     }

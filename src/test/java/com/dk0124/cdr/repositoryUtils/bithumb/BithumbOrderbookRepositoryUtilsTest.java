@@ -1,12 +1,12 @@
-package com.dk0124.cdr.repositoryPicker.bithumb;
+package com.dk0124.cdr.repositoryUtils.bithumb;
 
 import com.dk0124.cdr.constants.coinCode.bithumbCoinCode.BithumbCoinCode;
 import com.dk0124.cdr.persistence.dto.bithumb.orderbook.BithumbOrderbookDto;
 import com.dk0124.cdr.persistence.entity.bithumb.orderbook.BithumbOrderbook;
-import com.dk0124.cdr.persistence.entity.bithumb.orderbook.BithumbOrderbookFactory;
+import com.dk0124.cdr.persistence.entity.bithumb.orderbook.BithumbOrderbookUtils;
 import com.dk0124.cdr.persistence.mapper.bithumb.BithumbOrderbookMapper;
 import com.dk0124.cdr.persistence.repository.bithumb.bithumbOrderbookRepository.BithumbOrderbookCommonJpaInterface;
-import com.dk0124.cdr.persistence.repositoryPicker.bithumb.BithumbOrderbookRepositoryPicker;
+import com.dk0124.cdr.persistence.repositoryUtils.bithumb.BithumbOrderbookRepositoryUtils;
 import com.dk0124.cdr.tags.IntegrationWithContainer;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -28,24 +28,24 @@ import static org.junit.jupiter.api.Assertions.*;
 
 @IntegrationWithContainer
 @Transactional
-class BithumbOrderbookRepositoryPickerTest {
+class BithumbOrderbookRepositoryUtilsTest {
     @Container
     static PostgreSQLContainer container = new PostgreSQLContainer().withDatabaseName("studyTest");
 
     @Autowired
-    BithumbOrderbookRepositoryPicker bithumbOrderbookRepositoryPicker;
+    BithumbOrderbookRepositoryUtils bithumbOrderbookRepositoryUtils;
 
     @Autowired
     BithumbOrderbookMapper bithumbOrderbookMapper;
 
     @Test
-    void empty(){ assertNotNull(bithumbOrderbookRepositoryPicker);}
+    void empty(){ assertNotNull(bithumbOrderbookRepositoryUtils);}
 
     @ParameterizedTest()
     @DisplayName("BithumbOrderbookRepositoryPicker.getRepositoryFromCode(UpbitCoinCode code) 테스트")
     @MethodSource("get_each_bithumb_orderbooks")
     void getRepositoryFromCode(BithumbOrderbook o){
-        BithumbOrderbookCommonJpaInterface repository = bithumbOrderbookRepositoryPicker.getRepositoryFromCode(BithumbCoinCode.fromString(o.getCode()));
+        BithumbOrderbookCommonJpaInterface repository = bithumbOrderbookRepositoryUtils.getRepositoryFromCode(BithumbCoinCode.fromString(o.getCode()));
         BithumbOrderbook saved = repository.save(o);
         assertNotNull(saved);
         assertEquals(o.getClass(),saved.getClass());
@@ -62,7 +62,7 @@ class BithumbOrderbookRepositoryPickerTest {
                     .code(codes[i].toString())
                     .datetime(Long.valueOf(i))
                     .build();
-            candles[i] = BithumbOrderbookFactory.of(o);
+            candles[i] = BithumbOrderbookUtils.of(o);
         }
         return Arrays.stream(candles).map(o->Arguments.of(o));
     }
@@ -75,7 +75,7 @@ class BithumbOrderbookRepositoryPickerTest {
         save1000Orderbooks();
 
         BithumbOrderbookCommonJpaInterface repo
-                = bithumbOrderbookRepositoryPicker.getRepositoryFromCode(BithumbCoinCode.KRW_ADA);
+                = bithumbOrderbookRepositoryUtils.getRepositoryFromCode(BithumbCoinCode.KRW_ADA);
 
         PageRequest pageRequest = PageRequest.of(0, 200, Sort.by("datetime").descending());
         List<BithumbOrderbook> list = repo.findByDatetimeLessThanEqual(500L, pageRequest).getContent();
@@ -94,7 +94,7 @@ class BithumbOrderbookRepositoryPickerTest {
         save1000Orderbooks();
 
         BithumbOrderbookCommonJpaInterface repo
-                = bithumbOrderbookRepositoryPicker.getRepositoryFromCode(BithumbCoinCode.KRW_ADA);
+                = bithumbOrderbookRepositoryUtils.getRepositoryFromCode(BithumbCoinCode.KRW_ADA);
 
         PageRequest pageRequest = PageRequest.of(0, 200, Sort.by("datetime").descending());
         List<BithumbOrderbook> list = repo.findByDatetimeLessThanEqual(100L, pageRequest).getContent();
@@ -115,7 +115,7 @@ class BithumbOrderbookRepositoryPickerTest {
         save1000Orderbooks();
 
         BithumbOrderbookCommonJpaInterface repo
-                = bithumbOrderbookRepositoryPicker.getRepositoryFromCode(BithumbCoinCode.KRW_ADA);
+                = bithumbOrderbookRepositoryUtils.getRepositoryFromCode(BithumbCoinCode.KRW_ADA);
 
         PageRequest pageRequest = PageRequest.of(0, 200, Sort.by("datetime").descending());
         List<BithumbOrderbook> list = repo.findByDatetimeLessThanEqual(-1L, pageRequest).getContent();
@@ -135,8 +135,8 @@ class BithumbOrderbookRepositoryPickerTest {
                     .build();
 
             BithumbOrderbookCommonJpaInterface repo =
-                    bithumbOrderbookRepositoryPicker.getRepositoryFromCode(BithumbCoinCode.fromString(dto.getCode()));
-            repo.save(BithumbOrderbookFactory.of(bithumbOrderbookMapper.mapOrderbook(dto)));
+                    bithumbOrderbookRepositoryUtils.getRepositoryFromCode(BithumbCoinCode.fromString(dto.getCode()));
+            repo.save(BithumbOrderbookUtils.of(bithumbOrderbookMapper.mapOrderbook(dto)));
         }
     }
 

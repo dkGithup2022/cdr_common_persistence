@@ -1,7 +1,7 @@
 package com.dk0124.cdr.persistence.mapper.upbit;
 
 import com.dk0124.cdr.persistence.dto.upbit.orderbook.UpbitOrderbookDto;
-import com.dk0124.cdr.persistence.entity.upbit.orderbook.UpbitOrderBookFactory;
+import com.dk0124.cdr.persistence.entity.upbit.orderbook.UpbitOrderBookUtils;
 import com.dk0124.cdr.persistence.entity.upbit.orderbook.UpbitOrderbook;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
@@ -16,6 +16,6 @@ public class UpbitOrderbookMapper {
             throw new IllegalArgumentException("can not convert dto with empty code : " + dto.toString());
         if(dto.getTimestamp() == null)
             throw new IllegalArgumentException("can not convert dto with empty timestamp : " + dto.toString());
-        return UpbitOrderBookFactory.of(mapper.map(dto, UpbitOrderbook.class));
+        return UpbitOrderBookUtils.of(mapper.map(dto, UpbitOrderbook.class));
     }
 }

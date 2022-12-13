@@ -1,4 +1,4 @@
-package com.dk0124.cdr.persistence.repositoryPicker.bithumb;
+package com.dk0124.cdr.persistence.repositoryUtils.bithumb;
 
 import com.dk0124.cdr.constants.coinCode.bithumbCoinCode.BithumbCoinCode;
 import com.dk0124.cdr.persistence.repository.bithumb.bithumbCandleRepository.*;
@@ -9,7 +9,7 @@ import org.springframework.stereotype.Component;
 @Component
 @RequiredArgsConstructor
 @Slf4j
-public class BithumbCandleRepositoryPicker {
+public class BithumbCandleRepositoryUtils {
 
     private final BithumbCandleKrwDotRepository bithumbCandleKrwDotRepository;
     private final BithumbCandleKrwSolRepository bithumbCandleKrwSolRepository;

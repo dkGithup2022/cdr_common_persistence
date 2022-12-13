@@ -1,10 +1,10 @@
-package com.dk0124.cdr.repositoryPicker.upbit;
+package com.dk0124.cdr.repositoryUtils.upbit;
 
 import com.dk0124.cdr.constants.coinCode.UpbitCoinCode.UpbitCoinCode;
 import com.dk0124.cdr.persistence.entity.upbit.tick.UpbitTick;
-import com.dk0124.cdr.persistence.entity.upbit.tick.UpbitTickFactory;
+import com.dk0124.cdr.persistence.entity.upbit.tick.UpbitTickUtils;
 import com.dk0124.cdr.persistence.repository.upbit.upbitTickRepository.UpbitTickRepository;
-import com.dk0124.cdr.persistence.repositoryPicker.upbit.UpbitTickRepositoryPicker;
+import com.dk0124.cdr.persistence.repositoryUtils.upbit.UpbitTickRepositoryUtils;
 import com.dk0124.cdr.tags.IntegrationWithContainer;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -20,22 +20,21 @@ import org.testcontainers.containers.PostgreSQLContainer;
 import org.testcontainers.junit.jupiter.Container;
 
 import java.util.Arrays;
-import java.util.List;
 import java.util.stream.Stream;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 @IntegrationWithContainer
 @Transactional
-class UpbitTickRepositoryPickerTest {
+class UpbitTickRepositoryUtilsTest {
     @Container
     static PostgreSQLContainer container = new PostgreSQLContainer().withDatabaseName("studyTest");
     @Autowired
-    UpbitTickRepositoryPicker upbitTickRepositoryPicker;
+    UpbitTickRepositoryUtils upbitTickRepositoryUtils;
 
     @Test
     void empty() {
-        assertNotNull(upbitTickRepositoryPicker);
+        assertNotNull(upbitTickRepositoryUtils);
     }
 
 
@@ -44,7 +43,7 @@ class UpbitTickRepositoryPickerTest {
     @DisplayName("UpbitTickRepositoryPicker.getRepositoryFromCode(UpbitCoinCode code) 테스트")
     @MethodSource("get_each_typed_upbit_ticks")
     void getRepositoryFromCode(UpbitTick t) {
-        UpbitTickRepository tRepository = upbitTickRepositoryPicker.getRepositoryFromCode(UpbitCoinCode.fromString(t.getCode()));
+        UpbitTickRepository tRepository = upbitTickRepositoryUtils.getRepositoryFromCode(UpbitCoinCode.fromString(t.getCode()));
         UpbitTick saved = tRepository.save(t);
         assertNotNull(saved);
         assertEquals(t.getClass(),saved.getClass());
@@ -55,7 +54,7 @@ class UpbitTickRepositoryPickerTest {
         UpbitTick[] ticks = new UpbitTick[codes.length];
         for (int i = 0; i < ticks.length; i++) {
             UpbitTick t = UpbitTick.builder().code(codes[i].toString()).sequentialId(Long.valueOf(i)).build();
-            ticks[i] = UpbitTickFactory.of(t);
+            ticks[i] = UpbitTickUtils.of(t);
         }
         return Arrays.stream(ticks).map(t -> Arguments.of(t));
     }
@@ -69,7 +68,7 @@ class UpbitTickRepositoryPickerTest {
         save1000Ticks();
 
         UpbitTickRepository repo =
-                upbitTickRepositoryPicker.getRepositoryFromCode(UpbitCoinCode.KRW_ADA);
+                upbitTickRepositoryUtils.getRepositoryFromCode(UpbitCoinCode.KRW_ADA);
 
 
         PageRequest pageRequest = PageRequest.of(0, 200, Sort.by("timestamp").descending());
@@ -90,9 +89,9 @@ class UpbitTickRepositoryPickerTest {
 
 
             UpbitTickRepository repo =
-                    upbitTickRepositoryPicker.getRepositoryFromCode(UpbitCoinCode.KRW_ADA);
+                    upbitTickRepositoryUtils.getRepositoryFromCode(UpbitCoinCode.KRW_ADA);
 
-            repo.save(UpbitTickFactory.of(upbitTick));
+            repo.save(UpbitTickUtils.of(upbitTick));
         }
     }
 
