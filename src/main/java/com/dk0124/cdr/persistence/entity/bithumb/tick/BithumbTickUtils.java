@@ -1,6 +1,7 @@
 package com.dk0124.cdr.persistence.entity.bithumb.tick;
 
 import com.dk0124.cdr.constants.coinCode.bithumbCoinCode.BithumbCoinCode;
+import com.dk0124.cdr.persistence.dto.bithumb.tick.BithumbTickDto;
 import com.dk0124.cdr.persistence.entity.bithumb.tick.coins.*;
 import lombok.extern.slf4j.Slf4j;
 import org.modelmapper.ModelMapper;
@@ -10,6 +11,10 @@ import org.springframework.stereotype.Component;
 @Slf4j
 public class BithumbTickUtils {
     private final static ModelMapper modelMapper = new ModelMapper();
+
+    public static BithumbTick of(BithumbTickDto bithumbTickDto){
+        return BithumbTickUtils.of(modelMapper.map(bithumbTickDto, BithumbTick.class));
+    }
 
     public static BithumbTick of(BithumbTick bithumbTick){
         BithumbCoinCode bithumbCoinCode = BithumbCoinCode.fromString(bithumbTick.getCode());

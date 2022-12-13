@@ -3,6 +3,7 @@ package com.dk0124.cdr.persistence.repositoryUtils.bithumb;
 
 import com.dk0124.cdr.constants.coinCode.bithumbCoinCode.BithumbCoinCode;
 import com.dk0124.cdr.persistence.repository.bithumb.bithumbOrderbookRepository.*;
+import com.dk0124.cdr.persistence.repository.bithumb.bithumbTickRepository.BithumbTickRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
@@ -33,6 +34,10 @@ public class BithumbOrderbookRepositoryUtils {
     private final BithumbOrderbookKrwSandRepository bithumbOrderbookKrwSandRepository;
     private final BithumbOrderbookKrwSrmRepository bithumbOrderbookKrwSrmRepository;
     private final BithumbOrderbookKrwXrpRepository bithumbOrderbookKrwXrpRepository;
+
+    public BithumbOrderbookRepository getRepositoryFromCode(String code) {
+        return this.getRepositoryFromCode(BithumbCoinCode.fromString(code));
+    }
 
     public BithumbOrderbookRepository getRepositoryFromCode(BithumbCoinCode code) {
         switch (code) {

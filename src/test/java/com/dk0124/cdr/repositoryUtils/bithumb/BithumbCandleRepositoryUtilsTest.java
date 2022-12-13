@@ -114,7 +114,7 @@ class BithumbCandleRepositoryUtilsTest {
         PageRequest pageRequest = PageRequest.of(0, 200, Sort.by("timestamp").descending());
         List<BithumbCandle> list = repo.findByTimestampLessThanEqual(-1L, pageRequest).getContent();
 
-        assertEquals(0,list.size());
+        assertEquals(0, list.size());
 
     }
 

@@ -3,6 +3,7 @@ package com.dk0124.cdr.persistence.entity.upbit.tick;
 import com.dk0124.cdr.constants.coinCode.UpbitCoinCode.UpbitCoinCode;
 
 
+import com.dk0124.cdr.persistence.dto.upbit.tick.UpbitTickDto;
 import com.dk0124.cdr.persistence.entity.upbit.tick.coins.*;
 import lombok.extern.slf4j.Slf4j;
 import org.modelmapper.ModelMapper;
@@ -13,6 +14,10 @@ import org.springframework.stereotype.Component;
 public class UpbitTickUtils {
     //TODO : 빈 객체의  model Mapper 가져오기
     private final static ModelMapper modelMapper = new ModelMapper();
+
+    public static UpbitTick of(UpbitTickDto upbitTickDto){
+        return  UpbitTickUtils.of(modelMapper.map(upbitTickDto, UpbitTick.class));
+    }
 
     public static UpbitTick of(UpbitTick upbitTick){
         UpbitCoinCode upbitCoinCode =UpbitCoinCode.fromString( upbitTick.getCode());

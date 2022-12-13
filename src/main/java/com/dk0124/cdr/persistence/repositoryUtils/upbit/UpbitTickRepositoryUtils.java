@@ -2,6 +2,7 @@ package com.dk0124.cdr.persistence.repositoryUtils.upbit;
 
 
 import com.dk0124.cdr.constants.coinCode.UpbitCoinCode.UpbitCoinCode;
+import com.dk0124.cdr.persistence.repository.upbit.upbitOrderBookRepository.UpbitOrderbookRepository;
 import com.dk0124.cdr.persistence.repository.upbit.upbitTickRepository.*;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -35,6 +36,11 @@ public class UpbitTickRepositoryUtils {
     private final UpbitTickKrwSandRepository upbitTickKrwSandRepository;
     private final UpbitTickKrwSrmRepository upbitTickKrwSrmRepository;
     private final UpbitTickKrwXrpRepository upbitTickKrwXrpRepository;
+
+
+    public UpbitTickRepository getRepositoryFromCode(String code) {
+        return this.getRepositoryFromCode(UpbitCoinCode.fromString(code));
+    }
 
     public UpbitTickRepository getRepositoryFromCode(UpbitCoinCode code) {
         switch (code) {
@@ -86,7 +92,7 @@ public class UpbitTickRepositoryUtils {
                 return upbitTickKrwXrpRepository;
             default:
                 log.error("UpbitTickRespositoryPicker.getRepositoryFromCode , when code :  {}", code);
-                throw new IllegalStateException("UpbitTickRespositoryPicker.getRepositoryFromCode , when code :  {}"+ code);
+                throw new IllegalStateException("UpbitTickRespositoryPicker.getRepositoryFromCode , when code :  {}" + code);
         }
     }
 

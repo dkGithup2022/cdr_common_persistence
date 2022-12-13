@@ -34,55 +34,8 @@ public class BithumbTickRepositoryUtils {
     private final BithumbTickKrwSrmRepository bithumbTickKrwSrmRepository;
     private final BithumbTickKrwXrpRepository bithumbTickKrwXrpRepository;
 
-
-    public JpaRepository getRepository(BithumbCoinCode code){
-        switch (code) {
-            case KRW_ADA:
-                return bithumbTickKrwAdaRepository;
-            case KRW_ATOM:
-                return bithumbTickKrwAtomRepository;
-            case KRW_AVAX:
-                return bithumbTickKrwAvaxRepository;
-            case KRW_AXS:
-                return bithumbTickKrwAxsRepository;
-            case KRW_BAT:
-                return bithumbTickKrwBatRepository;
-            case KRW_BCH:
-                return bithumbTickKrwBchRepository;
-            case KRW_BTC:
-                return bithumbTickKrwBtcRepository;
-            case KRW_BTG:
-                return bithumbTickKrwBtgRepository;
-            case KRW_CHZ:
-                return bithumbTickKrwChzRepository;
-            case KRW_DOGE:
-                return bithumbTickKrwDogeRepository;
-            case KRW_DOT:
-                return bithumbTickKrwDotRepository;
-            case KRW_ENJ:
-                return bithumbTickKrwEnjRepository;
-            case KRW_ETH:
-                return bithumbTickKrwEthRepository;
-            case KRW_ETC:
-                return bithumbTickKrwEtcRepository;
-            case KRW_MANA:
-                return bithumbTickKrwManaRepository;
-            case KRW_MATIC:
-                return bithumbTickKrwMaticRepository;
-            case KRW_PLA:
-                return bithumbTickKrwPlaRepository;
-            case KRW_SAND:
-                return bithumbTickKrwSandRepository;
-            case KRW_SRM:
-                return bithumbTickKrwSrmRepository;
-            case KRW_SOL:
-                return bithumbTickKrwSolRepository;
-            case KRW_XRP:
-                return bithumbTickKrwXrpRepository;
-            default:
-                log.error("BithumbTickRespositoryPicker.getRepositoryFromCode , when code :  {}", code);
-                throw new IllegalStateException("BithumbTickRespositoryPicker.getRepositoryFromCode , when code :  {}"+ code);
-        }
+    public BithumbTickRepository getRepositoryFromCode(String code) {
+        return this.getRepositoryFromCode(BithumbCoinCode.fromString(code));
     }
 
     public BithumbTickRepository getRepositoryFromCode(BithumbCoinCode code) {
@@ -131,7 +84,7 @@ public class BithumbTickRepositoryUtils {
                 return bithumbTickKrwXrpRepository;
             default:
                 log.error("BithumbTickRespositoryPicker.getRepositoryFromCode , when code :  {}", code);
-                throw new IllegalStateException("BithumbTickRespositoryPicker.getRepositoryFromCode , when code :  {}"+ code);
+                throw new IllegalStateException("BithumbTickRespositoryPicker.getRepositoryFromCode , when code :  {}" + code);
         }
     }
 

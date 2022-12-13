@@ -2,6 +2,7 @@ package com.dk0124.cdr.persistence.entity.upbit.orderbook;
 
 import com.dk0124.cdr.constants.coinCode.UpbitCoinCode.UpbitCoinCode;
 
+import com.dk0124.cdr.persistence.dto.upbit.orderbook.UpbitOrderbookDto;
 import com.dk0124.cdr.persistence.entity.upbit.orderbook.coins.*;
 import lombok.extern.slf4j.Slf4j;
 import org.modelmapper.ModelMapper;
@@ -15,6 +16,9 @@ public class UpbitOrderBookUtils {
     //TODO : 빈 객체의  model Mapper 가져오기
     private final static ModelMapper modelMapper = new ModelMapper();
 
+    public static UpbitOrderbook of(UpbitOrderbookDto upbitOrderbookDto){
+        return UpbitOrderBookUtils.of(modelMapper.map(upbitOrderbookDto, UpbitOrderbook.class));
+    }
 
     public static UpbitOrderbook of(UpbitOrderbook upbitOrderbook){
         UpbitCoinCode upbitCoinCode =UpbitCoinCode.fromString( upbitOrderbook.getCode());

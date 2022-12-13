@@ -1,13 +1,21 @@
 package com.dk0124.cdr.persistence.entity.upbit.candle;
 
 import com.dk0124.cdr.constants.coinCode.UpbitCoinCode.UpbitCoinCode;
+import com.dk0124.cdr.persistence.dto.upbit.candle.UpbitCandleDto;
+import com.dk0124.cdr.persistence.dto.upbit.tick.UpbitTickDto;
 import com.dk0124.cdr.persistence.entity.upbit.candle.coin.*;
 
 import com.dk0124.cdr.persistence.entity.upbit.candle.coin.*;
+import com.dk0124.cdr.persistence.entity.upbit.tick.UpbitTick;
+import com.dk0124.cdr.persistence.entity.upbit.tick.UpbitTickUtils;
 import org.modelmapper.ModelMapper;
 
 public class UpbitCandleUtils {
     private final static ModelMapper modelMapper = new ModelMapper();
+
+    public static UpbitCandle of(UpbitCandleDto upbitCandleDto) {
+        return UpbitCandleUtils.of(modelMapper.map(upbitCandleDto, UpbitCandle.class));
+    }
 
     public static UpbitCandle of(UpbitCandle candle) {
         UpbitCoinCode upbitCoinCode = UpbitCoinCode.fromString(candle.getMarket());

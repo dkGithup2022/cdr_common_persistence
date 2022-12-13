@@ -16,29 +16,30 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class UpbitTickUtilsTest {
     @Test
-    void empty(){ }
+    void empty() {
+    }
 
     @ParameterizedTest()
     @DisplayName("UpbitTickFactory.of(abstract tick) 객체 생성 결과 확인하기  ")
     @MethodSource("get_each_upbit_ticks")
-    void update_event_dto_to_event(UpbitTick tick){
+    void update_event_dto_to_event(UpbitTick tick) {
         UpbitTick realTick = UpbitTickUtils.of(tick);
 
         String realTickClassName = realTick.getClass().toString();
         String inputCode = tick.getCode();
 
-        assertEquals(realTickClassName.substring(realTickClassName.length()-3,realTickClassName.length()).toLowerCase(),
-                inputCode.substring(inputCode.length()-3,inputCode.length()).toLowerCase()
-                );
+        assertEquals(realTickClassName.substring(realTickClassName.length() - 3, realTickClassName.length()).toLowerCase(),
+                inputCode.substring(inputCode.length() - 3, inputCode.length()).toLowerCase()
+        );
     }
 
-    static Stream<Arguments> get_each_upbit_ticks(){
+    static Stream<Arguments> get_each_upbit_ticks() {
         UpbitCoinCode[] codes = UpbitCoinCode.values();
         UpbitTick[] ticks = new UpbitTick[codes.length];
-        for( int i = 0; i< ticks.length; i++ ) {
+        for (int i = 0; i < ticks.length; i++) {
             UpbitTick t = UpbitTick.builder().code(codes[i].toString()).sequentialId(Long.valueOf(i)).build();
             ticks[i] = t;
         }
-        return Arrays.stream(ticks).map(t->Arguments.of(t));
+        return Arrays.stream(ticks).map(t -> Arguments.of(t));
     }
 }

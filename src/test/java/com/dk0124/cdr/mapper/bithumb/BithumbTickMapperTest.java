@@ -16,7 +16,7 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 
 class BithumbTickMapperTest {
 
-    String sampleTick ="{\n" +
+    String sampleTick = "{\n" +
             "        \"symbol\" : \"BTC_KRW\"," +
             "            \"buySellGb\" : \"1\"," +
             "            \"contPrice\" : \"10579000\", " +

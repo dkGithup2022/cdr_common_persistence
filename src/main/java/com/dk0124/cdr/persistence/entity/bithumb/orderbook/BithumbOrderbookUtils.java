@@ -1,6 +1,7 @@
 package com.dk0124.cdr.persistence.entity.bithumb.orderbook;
 
 import com.dk0124.cdr.constants.coinCode.bithumbCoinCode.BithumbCoinCode;
+import com.dk0124.cdr.persistence.dto.bithumb.orderbook.BithumbOrderbookDto;
 import com.dk0124.cdr.persistence.entity.bithumb.orderbook.coins.*;
 import lombok.extern.slf4j.Slf4j;
 import org.modelmapper.ModelMapper;
@@ -10,6 +11,10 @@ import org.springframework.stereotype.Component;
 @Slf4j
 public class BithumbOrderbookUtils {
     private final static ModelMapper modelMapper = new ModelMapper();
+
+    public static BithumbOrderbook of(BithumbOrderbookDto bithumbOrderbookDto) {
+        return BithumbOrderbookUtils.of(modelMapper.map(bithumbOrderbookDto,BithumbOrderbook.class));
+    }
 
 
     public static BithumbOrderbook of(BithumbOrderbook bithumOrderbook){

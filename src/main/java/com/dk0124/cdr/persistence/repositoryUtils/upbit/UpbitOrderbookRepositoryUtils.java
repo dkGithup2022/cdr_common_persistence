@@ -35,6 +35,11 @@ public class UpbitOrderbookRepositoryUtils {
     private final UpbitOrderbookKrwStxRepository upbitOrderbookKrwStxRepository;
     private final UpbitOrderbookKrwXrpRepository upbitOrderbookKrwXrpRepository;
 
+    public UpbitOrderbookRepository getRepositoryFromCode(String code) {
+        return this.getRepositoryFromCode(UpbitCoinCode.fromString(code));
+    }
+
+
     public UpbitOrderbookRepository getRepositoryFromCode(UpbitCoinCode code) {
         switch (code) {
             case KRW_ADA:
@@ -86,7 +91,7 @@ public class UpbitOrderbookRepositoryUtils {
 
             default:
                 log.error("UpbitRespositoryPicker.getRepositoryFromCode , when code :  {}", code);
-                throw new IllegalStateException("UpbitOrderbookRespositoryPicker.getRepositoryFromCode , when code :  {}"+ code);
+                throw new IllegalStateException("UpbitOrderbookRespositoryPicker.getRepositoryFromCode , when code :  {}" + code);
         }
     }
 }

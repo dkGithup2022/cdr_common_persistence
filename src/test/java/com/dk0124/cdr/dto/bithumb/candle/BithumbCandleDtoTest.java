@@ -10,21 +10,17 @@ import org.modelmapper.ModelMapper;
 import static org.junit.jupiter.api.Assertions.*;
 
 class BithumbCandleDtoTest {
-
     static ModelMapper mapper;
-
 
     @BeforeAll
     static void beforeAll() {
         mapper = new ModelMapper();
     }
 
-
     @Test
     @DisplayName("빈테스트 : cdr_common_persistence")
     void empty() {
     }
-
 
     @Test
     @DisplayName("dto 클래스 validation 검증 & dto class 빌드")
@@ -37,11 +33,11 @@ class BithumbCandleDtoTest {
                 .openingPrice(100.0)
                 .timestamp(1000000L).build();
 
-        BithumbCandle entity = mapper.map(dto,BithumbCandle.class);
+        BithumbCandle entity = mapper.map(dto, BithumbCandle.class);
 
         assertNotNull(dto);
         assertNotNull(entity);
-        assertEquals(dto.getClosingPrice(),entity.getClosingPrice());
-        assertEquals(dto.getCode(),entity.getCode());
+        assertEquals(dto.getClosingPrice(), entity.getClosingPrice());
+        assertEquals(dto.getCode(), entity.getCode());
     }
 }

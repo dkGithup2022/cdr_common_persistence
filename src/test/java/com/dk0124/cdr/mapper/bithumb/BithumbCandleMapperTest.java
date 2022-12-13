@@ -29,7 +29,6 @@ class BithumbCandleMapperTest {
             "            \"tradeAmount\":10000\n" +
             "    }";
 
-
     @BeforeAll
     static void setup() {
         bithumbCandleMapper = new BithumbCandleMapper(new ModelMapper());

@@ -2,6 +2,7 @@ package com.dk0124.cdr.persistence.repositoryUtils.upbit;
 
 import com.dk0124.cdr.constants.coinCode.UpbitCoinCode.UpbitCoinCode;
 import com.dk0124.cdr.persistence.repository.upbit.upbitCandleRepository.*;
+import com.dk0124.cdr.persistence.repository.upbit.upbitTickRepository.UpbitTickRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
@@ -33,6 +34,11 @@ public class UpbitCandleRepositoryUtils {
     private final UpbitCandleKrwSrmRepository upbitCandleKrwSrmRepository;
     private final UpbitCandleKrwStxRepository upbitCandleKrwStxRepository;
     private final UpbitCandleKrwXrpRepository upbitCandleKrwXrpRepository;
+
+
+    public UpbitCandleRepository getRepositoryFromCode(String code) {
+        return this.getRepositoryFromCode(UpbitCoinCode.fromString(code));
+    }
 
     public UpbitCandleRepository getRepositoryFromCode(UpbitCoinCode code) {
         switch (code) {
@@ -84,7 +90,7 @@ public class UpbitCandleRepositoryUtils {
                 return upbitCandleKrwXrpRepository;
             default:
                 log.error("UpbitCandleRespositoryPicker.getRepositoryFromCode , when code :  {}", code);
-                throw new IllegalStateException("UpbitCandleRespositoryPicker.getRepositoryFromCode , when code :  {}"+ code);
+                throw new IllegalStateException("UpbitCandleRespositoryPicker.getRepositoryFromCode , when code :  {}" + code);
         }
     }
 

@@ -1,7 +1,9 @@
 package com.dk0124.cdr.persistence.entity.bithumb.candle;
 
 import com.dk0124.cdr.constants.coinCode.bithumbCoinCode.BithumbCoinCode;
+import com.dk0124.cdr.persistence.dto.bithumb.candle.BithumbCandleDto;
 import com.dk0124.cdr.persistence.entity.bithumb.candle.coins.*;
+import com.dk0124.cdr.persistence.entity.bithumb.orderbook.BithumbOrderbookUtils;
 import lombok.extern.slf4j.Slf4j;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Component;
@@ -10,6 +12,11 @@ import org.springframework.stereotype.Component;
 @Slf4j
 public class BithumbCandleUtils {
     private final static ModelMapper modelMapper = new ModelMapper();
+
+    public static BithumbCandle of(BithumbCandleDto bithumbCandleDto){
+        return BithumbCandleUtils.of(modelMapper.map(bithumbCandleDto,BithumbCandle.class));
+    }
+
     public static BithumbCandle of(BithumbCandle bithumbCandle){
         BithumbCoinCode bithumbCoinCode = BithumbCoinCode.fromString(bithumbCandle.getCode());
         switch (bithumbCoinCode){

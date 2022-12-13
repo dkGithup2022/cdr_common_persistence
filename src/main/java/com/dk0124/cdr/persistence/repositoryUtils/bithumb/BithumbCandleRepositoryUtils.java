@@ -2,6 +2,7 @@ package com.dk0124.cdr.persistence.repositoryUtils.bithumb;
 
 import com.dk0124.cdr.constants.coinCode.bithumbCoinCode.BithumbCoinCode;
 import com.dk0124.cdr.persistence.repository.bithumb.bithumbCandleRepository.*;
+import com.dk0124.cdr.persistence.repository.bithumb.bithumbOrderbookRepository.BithumbOrderbookRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
@@ -10,7 +11,6 @@ import org.springframework.stereotype.Component;
 @RequiredArgsConstructor
 @Slf4j
 public class BithumbCandleRepositoryUtils {
-
     private final BithumbCandleKrwDotRepository bithumbCandleKrwDotRepository;
     private final BithumbCandleKrwSolRepository bithumbCandleKrwSolRepository;
     private final BithumbCandleKrwAdaRepository bithumbCandleKrwAdaRepository;
@@ -32,6 +32,10 @@ public class BithumbCandleRepositoryUtils {
     private final BithumbCandleKrwSandRepository bithumbCandleKrwSandRepository;
     private final BithumbCandleKrwSrmRepository bithumbCandleKrwSrmRepository;
     private final BithumbCandleKrwXrpRepository bithumbCandleKrwXrpRepository;
+
+    public BithumbCandleRepository getRepositoryFromCode(String code) {
+        return this.getRepositoryFromCode(BithumbCoinCode.fromString(code));
+    }
 
     public BithumbCandleRepository getRepositoryFromCode(BithumbCoinCode code) {
         switch (code) {
@@ -79,7 +83,7 @@ public class BithumbCandleRepositoryUtils {
                 return bithumbCandleKrwXrpRepository;
             default:
                 log.error("BithumbCandleRespositoryPicker.getRepositoryFromCode , when code :  {}", code);
-                throw new IllegalStateException("BithumbCandleRespositoryPicker.getRepositoryFromCode , when code :  {}"+ code);
+                throw new IllegalStateException("BithumbCandleRespositoryPicker.getRepositoryFromCode , when code :  {}" + code);
         }
     }
 }
