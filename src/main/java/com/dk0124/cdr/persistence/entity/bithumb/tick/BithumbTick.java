@@ -19,8 +19,6 @@ import java.util.Date;
 @Setter
 @EqualsAndHashCode(of = "id")
 public class BithumbTick implements Ticks {
-    // 빌더에 빌드 함수 오버라이드
-    // 생성자 함수 생성
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)

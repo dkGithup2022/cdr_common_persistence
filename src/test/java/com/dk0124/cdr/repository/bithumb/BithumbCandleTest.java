@@ -114,7 +114,6 @@ public class BithumbCandleTest {
         List<BithumbCandle> list = repo.findByTimestampLessThanEqual(100L, pageRequest).getContent();
 
         //t
-        System.out.println(list);
         assertEquals(101, list.stream().map(e->e.getTimestamp()).distinct().count());
     }
 
