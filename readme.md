@@ -1,62 +1,35 @@
-#cdr_common_persistence
-  이 모듈은 cdr 프로젝트에서 공용으로 사용할 persistence layer의 클래스들을 제공합니다.
-  업비트 코인 23 개에 대한 캔들,거래내역, 오더북과 빘썸 21개 코인에 대한 거래내역, 캔들, 오더북 데이터를 수급
-  총 140 여개의 테이블과 그에 대한 Dto, repository 클래스가 제공됨.
-  type safe 한 repository 사용을 위한 Repository picker 클래스가 제공됨. 사용법은 README 혹은 test 코드 참고 
+# CDR-API-PERSISTENCE
 
-###목차
- 1. 제공 기능
- 2. 패키지
- 3. 테스트
+ <img src="https://img.shields.io/badge/SpringBoot-6DB33F?style=flat&logo=SpringBoot&logoColor=white"/>
+ <img src="https://img.shields.io/badge/JPA-6DB33F?style=flat&logo=SpringBoot&logoColor=white"/>
 
 
-### 제공 기능 
-1. entity 
-2. dto 
-3. mapper 
-4. jpa repository 
-5. jpa repository picker
+위의 데이터들, 132 개 테이블에 대한 persistence layer 공통 코드에 대한 모듈입니다.
 
-#### entity 
-jpa entity 클래스를 정의함. 
-  vender 사, 코인 종류, 데이터 종류별로 구분한 테이블의 구조 
-자세한 내용은  이 링크로 : https://www.notion.so/1091f39112244ad9b746e18df6868960
+## entity & dto
+* vendor type: upbit, bithumb 
+* data type: ticks, orderbook, candles
+* code 
+  * bithumb : [KRW-BTC, KRW-XRP, KRW-ETH, KRW-STX, KRW-SOL, KRW-ADA, KRW-DOT, KRW-BCH, KRW-BAT, KRW-AVAX, KRW-ETC, KRW-AXS, KRW-PLA, KRW-SAND, KRW-SRM, KRW-DOGE, KRW-MANA, KRW-FLOW, KRW-BTG, KRW-ATOM, KRW-MATIC, KRW-ENJ, KRW-CHZ]
+  * upbit : [BTC_KRW, XRP_KRW, ETH_KRW, SOL_KRW, ADA_KRW, DOT_KRW, BCH_KRW, BAT_KRW, AVAX_KRW, ETC_KRW, AXS_KRW, PLA_KRW, SAND_KRW, SRM_KRW, DOGE_KRW, MANA_KRW, BTG_KRW, ATOM_KRW, MATIC_KRW, ENJ_KRW, CHZ_KRW]
 
-주의점  : 지금 code 의 타입이 String 으로 되어 있는데, 만약에 CoinCode enum 으로 바꾸는게 더 적절한거 같으면 김도현한테 연락.
-이거 나도 햇갈림 ( 김도현)
-#### dto
-dto 클래스, 코인 종류별로 데이터를 구분 하지 않음 .
-#### mapper 
-dto 오브젝트를 entity 로 변환.
-jpa repository 에서 사용하기 전에 변환 하는 것이 권장됨
-dto 는 코인 별 구분이 없지만 mapper 의 결과로 코인 종류가 구분된 타입의 데이터가 리턴됨 .
-만약 올바르지 않은 CODE 값을 DTO 가 갖고 있다면 mapper 혹은 entityFactory 코드에서 IllegalArgumentException 을 반환 
+각 코드에 대한 클래스의 추상화 클래스를 각 entity.vendor.dataType 패키지의 상위에서 제공합니다. 추상화 클래스로 변환은 해당 패키지 위치의 UTILS클래스에서 제공함.
 
-      void map_candle_with_valid_input() throws JsonProcessingException {
-        UpbitOrderbookDto dto = objectMapper.readValue(sampleOrderbookString,UpbitOrderbookDto.class);
-        dto.setCode("KRW-BTC");
-        UpbitOrderbook orderbook = upbitOrderbookMapper.mapOrderbook(dto);
-        assert orderbook instanceof UpbitOrderbook;       // true
-        assert orderbook instanceof UpbitOrderbookKrwBtc; // true
-    }
-    
-#### jpa repository
-entity 에 대한 jpa 레포지토리 
+## repositoryUtils
+String code, CoinCode code 를 입력받아, 해당 코드에 맞는 Repository interface 를 리턴합니다. 위의 {data}Utils 에서 추상화된 데이터 클래스 사용 시 사용할 수 있습니다.
 
-#### repositoryPicker
-입력받은 CoinCode 에 맞는 repository 를 반환함. 
+테스트 코드 작성이 어려운 구조라 수정 예정에 있습니다. 
 
-    @ParameterizedTest()
-    @DisplayName("UpbitCandleRepositoryPicker.getRepositoryFromCode(UpbitCoinCode code) 테스트")
-    @MethodSource("get_each_typed_upbit_candles")
-    void getRepositoryFromCode(UpbitCandle c){
-        UpbitCandleCommonJpaInterface repository = upbitTickRepositoryPicker.getRepositoryFromCode(UpbitCoinCode.fromString(c.getMarket()));
-        UpbitCandle saved = repository.save(c);
-        assertNotNull(saved);
-        assertEquals(c.getClass(),saved.getClass());
-    }
+예시)
+```
+package repository.bithumbCandleRepository.BithumbCandleTest
 
+@Test
+void get_repository_from_code_and_save(BithumbCandle c) {
+  BithumbCandleRepository repository =
+      bithumbCandleRepositoryUtils.getRepositoryFromCode(c.getCode());
+  BithumbCandle saved = repository.save(c);
+}
+```
 
-###패키지
-src
-
+##
